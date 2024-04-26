@@ -1,1 +1,11 @@
 /* TODO: Add sitewide styles */
+* {
+  margin: 0;
+  padding: 0;
+  color: black
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto
+}

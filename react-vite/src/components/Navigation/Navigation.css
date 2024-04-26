@@ -1,3 +1,29 @@
+.navigation {
+  background-color: blue;
+  padding: 10px 0
+}
+
+.navigation > .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-icons {
+  height: 100%;
+  font-size: 1.1em;
+}
+
+.right.nav-icons {
+  display: flex;
+  gap: 20px
+}
+
+.nav-icons > a {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2em;
+}
+
 .profile-dropdown {
   position: absolute;
 }
