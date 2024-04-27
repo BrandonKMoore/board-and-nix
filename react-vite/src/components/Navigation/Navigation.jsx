@@ -12,7 +12,6 @@ function Navigation() {
     setShowMenu(!showMenu)
   }
 
-  console.log(showMenu)
   return (
     <div className="navigation">
       <div className="container">
@@ -21,7 +20,7 @@ function Navigation() {
         </div>
         <div className="right nav-icons">
           <Link to='/'><IoPersonOutline /></Link>
-          <Link to='/'><PiShoppingCartSimple /></Link>
+          <Link to='/products'><PiShoppingCartSimple /></Link>
         </div>
       </div>
     </div>

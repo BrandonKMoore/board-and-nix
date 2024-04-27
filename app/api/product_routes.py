@@ -21,6 +21,7 @@ def get_all_products():
 #Get product by id
 @product_routes.route('/<int:id>', methods=['GET'])
 def get_product_by_id(id):
+  product = ''
   #Catch if query isn't found in database
   try:
     product = Product.query.filter(Product.id == id).one()
@@ -66,7 +67,11 @@ def create_product():
 #Update existing product
 @product_routes.route('/<int:id>', methods=['PUT'])
 def update_product(id):
-  product = Product.query.filter(Product.id == id).one()
+  product = ''
+  try:
+    product = Product.query.filter(Product.id == id).one()
+  except:
+    return f'No product found with the id of {id}', 404
 
   form = NewProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
