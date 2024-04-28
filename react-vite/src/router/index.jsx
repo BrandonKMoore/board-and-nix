@@ -4,6 +4,8 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import ProductBrowsePage from '../components/ProductBrowsePage';
 import LandingPage from '../components/LandingPage';
+import ProductPage from '../components/ProductPage';
+import AdminPage from '../components/AdminPage';
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +17,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <ProductBrowsePage />
+        children: [
+          {
+            index: true,
+            element: <ProductBrowsePage />,
+          },
+          {
+            path: ":productId",
+            element: <ProductPage />
+          },
+        ]
+      },
+      {
+        path: "administrator",
+        element: <AdminPage />
       },
       {
         path: "login",

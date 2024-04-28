@@ -2,10 +2,18 @@
 * {
   margin: 0;
   padding: 0;
-  color: black
+  color: black;
+}
+
+body {
+  background-color: lightgrey;
 }
 
 .container {
   max-width: 1080px;
   margin: 0 auto
+}
+
+img, .hero {
+  user-select: none;
 }

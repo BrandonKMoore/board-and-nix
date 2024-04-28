@@ -12,7 +12,6 @@ export default function ProductBrowsePage(){
   }, [dispatch])
 
   if (!allProducts) return <span>Loading...</span>
-  console.log(allProducts[1])
   return(
     <div className="productBrowserPage">
       <div className="hero">
