@@ -21,5 +21,6 @@ COPY . .
 
 RUN flask db upgrade
 RUN flask seed all
-CMD gunicorn --access-logfile - --error-logfile - app:app
-# CMD gunicorn app:app
+# CMD gunicorn --access-logfile - --error-logfile - app:app
+
+CMD gunicorn app:app

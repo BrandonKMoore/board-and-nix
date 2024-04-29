@@ -23,9 +23,18 @@ def seed_product_images():
 
     for idx in range(100):
         product_image = ProductImage(
-            product_id = randint(0, 19),
+            product_id = randint(0, 20),
             image_url = choice(urls),
             is_cover = choice([True, False])
+            )
+
+        product_images.append(product_image)
+
+    for idx in range(0,21):
+        product_image = ProductImage(
+            product_id = idx,
+            image_url = choice(urls),
+            is_cover = True
             )
 
         product_images.append(product_image)
