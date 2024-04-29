@@ -18,6 +18,9 @@ function Navigation() {
         <div className="left nav-icons">
           {showMenu ? <RxCross1 onClick={handleMenuClick}/>: <RxHamburgerMenu onClick={handleMenuClick}/>}
         </div>
+        <div className="logo">
+          <h1>BOARD & NIX</h1>
+        </div>
         <div className="right nav-icons">
           <Link to='/'><IoPersonOutline /></Link>
           <Link to='/products'><PiShoppingCartSimple /></Link>
