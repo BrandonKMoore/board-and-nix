@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { thunkGetProductById } from '../../redux/product'
 import './ProductPage.css'
@@ -45,7 +45,7 @@ export default function ProductPage(){
                 <span>Color:</span>
               </div>
               <div className='quantity'>
-                Quantity:
+                <span>Quantity:</span>
               </div>
               <button>Add to cart</button>
             </div>
