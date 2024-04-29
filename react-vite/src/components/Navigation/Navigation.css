@@ -6,6 +6,7 @@
 .navigation > .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .nav-icons {
@@ -13,10 +14,15 @@
   font-size: 1.1em;
 }
 
+.left.nav-icons {
+  width: 100px;
+}
+
 .right.nav-icons {
   display: flex;
-  justify-content: end;
-  gap: 20px
+  justify-content: flex-end;
+  width: 100px;
+  gap: 10px
 }
 
 .nav-icons > a {
