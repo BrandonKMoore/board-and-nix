@@ -15,6 +15,7 @@
 
 .right.nav-icons {
   display: flex;
+  justify-content: end;
   gap: 20px
 }
 

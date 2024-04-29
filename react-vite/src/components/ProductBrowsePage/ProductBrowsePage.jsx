@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useState, useEffect } from "react";
 import { thunkGetAllProducts } from "../../redux/product";
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import "./ProductBrowsePage.css"
 
 export default function ProductBrowsePage(){
@@ -25,9 +26,11 @@ export default function ProductBrowsePage(){
         <div className="product-card-list">
           {allProducts.map((product)=>
             <div className="product-card" key={product.id}>
-              <img src={product.Images.length > 0 ? product.Images.find((image)=> image.is_cover === true).image_url: null} alt="" />
+              <Link to={`/products/${product.id}`}>
+                <img src={product.Images.length > 0 ? product.Images.find((image)=> image.is_cover === true).image_url: null} alt="" />
+              </Link>
               <div className="details">
-                <h4>{product.name}</h4>
+                <Link to={`/products/${product.id}`}><h4>{product.name}</h4></Link>
                 <span>From ${product.price}</span>
               </div>
             </div>)}

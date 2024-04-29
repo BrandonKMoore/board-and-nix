@@ -42,7 +42,7 @@
   width: 22%;
 }
 
-.product-card > img {
+.product-card img {
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
   width: 100%;
