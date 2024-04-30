@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         ]
       },
       {
-        path: "administrator",
+        path: "admin",
         element: <AdminPage />
       },
       {
