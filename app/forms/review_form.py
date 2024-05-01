@@ -4,11 +4,11 @@ from wtforms.validators import DataRequired, ValidationError
 from app.models import Review
 
 def max_stars(form, field):
-  if field.data > 5:
-    raise ValidationError('Reviews only can have up to 5 stars')
+  if field.data > 5 or field.data < 1:
+    raise ValidationError('Reviews only can have 1 to 5 stars')
 
 class ReviewForm(FlaskForm):
-  user_id = IntegerField('user_id', nullable=False)
-  product_id = IntegerField('product_id', nullable=False)
-  body = StringField('body', nullable=False)
-  stars = IntegerField('stars', nullable=False, validators=[max_stars])
+  user_id = IntegerField('user_id', validators=[DataRequired()] )
+  product_id = IntegerField('product_id', validators=[DataRequired()] )
+  body = StringField('body', validators=[DataRequired()] )
+  stars = IntegerField('stars', validators=[DataRequired(), max_stars])

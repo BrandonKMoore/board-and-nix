@@ -51,7 +51,7 @@ def create_product():
 
 
     files = request.form['files']
-    print('---->>>>>', files)
+    print()
 
     db.session.add(new_product)
     db.session.commit()

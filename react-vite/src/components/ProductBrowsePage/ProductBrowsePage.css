@@ -7,12 +7,12 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   /* background-position: center -200px;  Great for 1080 and smaller */
-  margin-top: -50px;
+  margin-top: -60px;
   background-position: center -350px;
   background-size: cover;
   width: 100%;
   min-height: 200px;
-  height: 60vh;
+  height: 50vh;
 }
 
 .productBrowserPage > .hero > .overlay {
