@@ -22,7 +22,7 @@ function Navigation() {
           <h1>BOARD & NIX</h1>
         </div>
         <div className="right nav-icons">
-          <Link to='/'><IoPersonOutline /></Link>
+          <Link to='/admin'><IoPersonOutline /></Link>
           <Link to='/products'><PiShoppingCartSimple /></Link>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import ProductFormModal from '../ProductFormModal/ProductFormModal'
+import OpenModalButton from '../OpenModalButton'
 import { useSelector } from 'react-redux'
 import './AdminPage.css'
 
@@ -13,6 +15,12 @@ export default function AdminPage(){
             <h1>Administrator&apos;s Console</h1>
           </div>
         </div>
+      </div>
+      <div>
+        <OpenModalButton
+          buttonText="New Product"
+          modalComponent={<ProductFormModal />}
+        />
       </div>
     </div>
   )

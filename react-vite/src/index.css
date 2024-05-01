@@ -18,6 +18,10 @@ body {
   margin: 0 auto
 }
 
-img, .hero {
+img, .hero, .logo > h1 {
   user-select: none;
+}
+
+textarea {
+  resize: none;
 }
