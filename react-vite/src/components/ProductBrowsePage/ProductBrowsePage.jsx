@@ -3,14 +3,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import "./ProductBrowsePage.css"
+import { thunkGetAllReviews } from "../../redux/review";
 
 export default function ProductBrowsePage(){
   const dispatch = useDispatch()
   const allProducts = useSelector(state => state.product.allProducts)
-
-  useEffect(()=>{
-    dispatch(thunkGetAllProducts())
-  }, [dispatch])
 
   if (!allProducts) return <span>Loading...</span>
   return(

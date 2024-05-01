@@ -6,7 +6,9 @@ import './ProductPage.css'
 
 export default function ProductPage(){
   const { product } = useSelector(state => state.product)
+  const allReviews = useSelector(state => state.review.allReviews)
   const [ mainImage, setMainImage ] = useState('')
+  const [ showReviewForm, setShowReviewForm ] = useState(false)
   const dispatch = useDispatch()
   const { productId } = useParams()
 
@@ -14,8 +16,10 @@ export default function ProductPage(){
     dispatch(thunkGetProductById(productId))
   }, [dispatch, productId])
 
-  if (!product) return <span>Loading...</span>
+  if (!product || product.id != productId || !allReviews) return <span>Loading...</span>
   if (!mainImage) setMainImage(product.Images.find(product => product.is_cover === true).image_url)
+
+  const productReviews = allReviews.filter(review => review.product_id == productId)
 
   return (
     <div className="productPage">
@@ -57,9 +61,23 @@ export default function ProductPage(){
           <p>{product.description}</p>
         </div>
         <div className='product-reviews'>
-          <h2>Reviews</h2>
+          <div>
+            <h2>Reviews</h2>
+            <button onClick={()=> setShowReviewForm(!showReviewForm)}>Leave Review</button>
+          </div>
           <div className="h-linebreak"></div>
-          <p>Coming Soon</p>
+          <form>
+        
+          </form>
+          <div className='review-container'>
+            {productReviews.map((review)=>
+              <div className='review' key={review.id}>
+                <div>Review By {review.user_id}</div>
+                <div>Stars {review.stars}</div>
+                <div>Comment {review.body}</div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

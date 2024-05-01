@@ -1,6 +1,7 @@
 import ProfileButton from "../Navigation/ProfileButton"
 
 export default function LandingPage(){
+
   return (
     <>
       <ProfileButton />

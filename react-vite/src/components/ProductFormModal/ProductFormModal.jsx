@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import './ProductForm.css'
+import { thunkAddProduct } from "../../redux/product";
 
 export default function ProductFormModal(){
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export default function ProductFormModal(){
   const [dimension_w, setDimension_w] = useState("")
   const [dimension_h, setDimension_h] = useState("")
   const [customizable, setCustomizable] = useState(false)
-  const [imageUrl, setImageUrl] = useState()
+  const [imageFiles, setImageFiles] = useState()
   const [imageIsCover, setImageIsCover] = useState(true)
 
   const handleSubmit = async (e) => {
@@ -32,17 +33,45 @@ export default function ProductFormModal(){
       if (!dimension_h) dimensionError += ' height'
       newError.dimension = dimensionError
     }
-    // if (!imageUrl) newError.imageUrl = 'At least one Image is needed for product to be added'
-
-    console.log(newError)
+    if (!imageFiles || imageFiles.length > 5) newError.imageFiles = 'Please upload 1 to 5 product pictures'
 
     if (Object.entries(newError).length > 0) return setErrors(newError)
+
+    const productFormData = new FormData()
+    productFormData.append('name', name)
+    productFormData.append('price', price)
+    productFormData.append('description', description)
+    productFormData.append('dimension_l', dimension_l)
+    productFormData.append('dimension_w', dimension_w)
+    productFormData.append('dimension_h', dimension_h)
+    // productFormData.append('files', imageFiles)
+    productFormData.set('files', imageFiles)
+
+    const listOfFiles = [...imageFiles]
+    listOfFiles.some((file, idx) => {
+      console.log(`file[${idx}]`, file)
+      console.log('idx', idx)
+      productFormData.append(`file[${idx}]`, file)
+    })
+
+    const newProduct = await dispatch(thunkAddProduct(productFormData))
+    if (newProduct){
+      console.log(newProduct.id)
+    }
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      // navigate("/");
+    }
+
   }
 
 
   return (
     <div className="newProductForm">
       <h1>New Product Form</h1>
+      {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           <input
@@ -97,7 +126,6 @@ export default function ProductFormModal(){
           <span>in</span>
         </div>
         {errors.dimension && <p>{errors.dimension}</p>}
-
         <div className="customizable">
           <span>Customizable: </span>
           <label>
@@ -130,6 +158,22 @@ export default function ProductFormModal(){
           />
         </label>
         {errors.description && <p>{errors.description}</p>}
+        <div className="uploadImg">
+          <label>
+            <span>Upload product picture(s): </span>
+          </label>
+          <input
+            type="file"
+            name="productImg"
+            id="productImg"
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={(e) => setImageFiles(e.target.files)}
+            onClick={(e) => e.target.value = null}
+            multiple
+          />
+        </div>
+        {errors.imageFiles && <p>{errors.imageFiles}</p>}
+        {console.log(errors)}
         <button type="submit">Submit</button>
       </form>
     </div>

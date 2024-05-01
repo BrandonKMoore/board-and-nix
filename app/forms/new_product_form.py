@@ -8,9 +8,9 @@ def product_exist(form, field):
   name = Product.query.filter(Product.name == new_name).first()
   if name:
     raise ValidationError('A product with the provided name already exist')
-
+#product_exist
 class NewProductForm(FlaskForm):
-  name = StringField('name', validators=[DataRequired(), product_exist])
+  name = StringField('name', validators=[DataRequired()])
   description = StringField('description', validators=[DataRequired()])
   price = DecimalField('price', places=2, validators=[DataRequired()])
   dimension_l = DecimalField('dimension_l', places=1)
