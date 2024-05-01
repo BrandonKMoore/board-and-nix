@@ -38,7 +38,7 @@ export const thunkGetProductById = (productId) => async (dispatch) => {
   }
 };
 
-export const thunkAddProductById = (data) => async (dispatch) => {
+export const thunkAddProduct = (data) => async (dispatch) => {
   const response = await fetch('/api/products/', {
     method: "POST",
     body: data
@@ -46,9 +46,10 @@ export const thunkAddProductById = (data) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllProducts: ${data.errors}`)
+      return console.log(`Error with response from thunkAddProduct: ${data.errors}`)
     }
-    dispatch(setProduct(data))
+    return data.new_product
+    // dispatch(setProduct(data))
   }
 };
 

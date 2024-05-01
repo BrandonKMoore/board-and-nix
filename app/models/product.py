@@ -19,6 +19,7 @@ class Product(db.Model):
   updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
 
   product_images = db.relationship('ProductImage', back_populates='product', cascade="all, delete-orphan")
+  reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan")
 
   def get_dimensions(self):
     if self.dimension_l and self.dimension_l and self.dimension_w:
