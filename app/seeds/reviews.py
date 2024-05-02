@@ -43,8 +43,8 @@ def seed_reviews():
 
   for idx in range(100):
     review = Review(
-      user_id = randint(0, 2),
-      product_id = randint(0, 20),
+      user_id = randint(1, 3),
+      product_id = randint(1, 20),
       body = choice(review_body),
       stars = randint(1, 5)
     )
