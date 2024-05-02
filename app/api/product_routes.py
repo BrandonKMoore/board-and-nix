@@ -33,6 +33,7 @@ def get_product_by_id(id):
 #Create new product
 @product_routes.route('/', methods=['POST'])
 def create_product():
+  print(request.form)
   productForm = NewProductForm()
   imageForm = NewImageForm()
   productForm['csrf_token'].data = request.cookies['csrf_token']
@@ -51,7 +52,6 @@ def create_product():
 
 
     files = request.form['files']
-    print()
 
     db.session.add(new_product)
     db.session.commit()

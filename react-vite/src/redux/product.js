@@ -39,6 +39,10 @@ export const thunkGetProductById = (productId) => async (dispatch) => {
 };
 
 export const thunkAddProduct = (data) => async (dispatch) => {
+  // data.entries().map(([key, value]) => console.log(key, ':', value))
+  for (const [key, value] of data.entries()) {
+    console.log("product====>", key, "= ", value);
+}
   const response = await fetch('/api/products/', {
     method: "POST",
     body: data

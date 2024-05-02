@@ -45,26 +45,22 @@ export default function ProductFormModal(){
     productFormData.append('dimension_w', dimension_w)
     productFormData.append('dimension_h', dimension_h)
     // productFormData.append('files', imageFiles)
-    productFormData.set('files', imageFiles)
+    // productFormData.set('files', imageFiles)
 
-    const listOfFiles = [...imageFiles]
-    listOfFiles.some((file, idx) => {
-      console.log(`file[${idx}]`, file)
-      console.log('idx', idx)
-      productFormData.append(`file[${idx}]`, file)
-    })
+    // const listOfFiles = [...imageFiles]
+    // listOfFiles.some((file, idx) => {
+    //   console.log(`file[${idx}]`, file)
+    //   console.log('idx', idx)
+    //   productFormData.append(`file[${idx}]`, file)
+    // })
 
-    const newProduct = await dispatch(thunkAddProduct(productFormData))
-    if (newProduct){
-      console.log(newProduct.id)
-    }
+    const serverResponse = await dispatch(thunkAddProduct(productFormData))
 
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
       // navigate("/");
     }
-
   }
 
 
@@ -167,9 +163,9 @@ export default function ProductFormModal(){
             name="productImg"
             id="productImg"
             accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => setImageFiles(e.target.files)}
+            onChange={(e) => setImageFiles(e.target.files[0])}
             onClick={(e) => e.target.value = null}
-            multiple
+            // multiple
           />
         </div>
         {errors.imageFiles && <p>{errors.imageFiles}</p>}
