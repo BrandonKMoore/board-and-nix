@@ -12,10 +12,7 @@
 .nav-icons {
   height: 100%;
   font-size: 1.1em;
-}
-
-.logo > h1 {
-  
+  cursor: pointer;
 }
 
 .left.nav-icons {
@@ -35,6 +32,19 @@
   font-size: 1.2em;
 }
 
-.profile-dropdown {
+.dropdown-menu {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  li {
+    list-style: none;
+    user-select: none;
+  }
+  :hover {
+    cursor: pointer;
+  }
 }

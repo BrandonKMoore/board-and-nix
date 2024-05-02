@@ -16,7 +16,7 @@ export default function ProductPage(){
     dispatch(thunkGetProductById(productId))
   }, [dispatch, productId])
 
-  if (!product || product.id != productId || !allReviews) return <span>Loading...</span>
+  if (!product || product.id != productId || !allReviews) return
   if (!mainImage) setMainImage(product.Images.find(product => product.is_cover === true).image_url)
 
   const productReviews = allReviews.filter(review => review.product_id == productId)
@@ -67,7 +67,7 @@ export default function ProductPage(){
           </div>
           <div className="h-linebreak"></div>
           <form>
-        
+
           </form>
           <div className='review-container'>
             {productReviews.map((review)=>

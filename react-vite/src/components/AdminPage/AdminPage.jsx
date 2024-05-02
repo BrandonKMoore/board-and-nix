@@ -2,9 +2,11 @@ import ProductFormModal from '../ProductFormModal/ProductFormModal'
 import OpenModalButton from '../OpenModalButton'
 import { useSelector } from 'react-redux'
 import './AdminPage.css'
+import { useState } from 'react'
 
 export default function AdminPage(){
   const administrator = useSelector(state => state.session.user)
+  const [render, setRender] = useState('')
 
   if (!administrator) return <span>Loading...</span>
   return (
@@ -16,11 +18,15 @@ export default function AdminPage(){
           </div>
         </div>
       </div>
-      <div>
-        <OpenModalButton
-          buttonText="New Product"
-          modalComponent={<ProductFormModal />}
-        />
+      <div className='main-content container'>
+        <ul className='left-section'>
+          <li onClick={()=> setRender(<ProductFormModal />)}>Create Product</li>
+          <li onClick={()=> setRender(<ProductFormModal />)}>Edit Product</li>
+          <li onClick={()=> setRender(<ProductFormModal />)}>Delete Product</li>
+        </ul>
+        <div className='main-section'>
+            {render}
+        </div>
       </div>
     </div>
   )

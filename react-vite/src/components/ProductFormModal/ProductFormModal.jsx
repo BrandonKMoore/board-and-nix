@@ -17,6 +17,7 @@ export default function ProductFormModal(){
   const [customizable, setCustomizable] = useState(false)
   const [imageFiles, setImageFiles] = useState()
   const [imageIsCover, setImageIsCover] = useState(true)
+  const [modalPage, setModalPage] = useState(1)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,15 +45,6 @@ export default function ProductFormModal(){
     productFormData.append('dimension_l', dimension_l)
     productFormData.append('dimension_w', dimension_w)
     productFormData.append('dimension_h', dimension_h)
-    // productFormData.append('files', imageFiles)
-    // productFormData.set('files', imageFiles)
-
-    // const listOfFiles = [...imageFiles]
-    // listOfFiles.some((file, idx) => {
-    //   console.log(`file[${idx}]`, file)
-    //   console.log('idx', idx)
-    //   productFormData.append(`file[${idx}]`, file)
-    // })
 
     const serverResponse = await dispatch(thunkAddProduct(productFormData))
 
@@ -66,9 +58,10 @@ export default function ProductFormModal(){
 
   return (
     <div className="newProductForm">
+    {modalPage === 1 ?
+    <form onSubmit={handleSubmit}>
+    {errors.server && <p>{errors.server}</p>}
       <h1>New Product Form</h1>
-      {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
         <label>
           <input
             type="text"
@@ -99,7 +92,7 @@ export default function ProductFormModal(){
               onChange={(e) => setDimension_l(e.target.value)}
               />
           </label>
-          <span>in x</span>
+          <div>in x</div>
           <label>
             <input
               type="number"
@@ -109,7 +102,7 @@ export default function ProductFormModal(){
               onChange={(e) => setDimension_w(e.target.value)}
               />
           </label>
-          <span>in x</span>
+          <div>in x</div>
           <label>
             <input
               type="number"
@@ -158,20 +151,11 @@ export default function ProductFormModal(){
           <label>
             <span>Upload product picture(s): </span>
           </label>
-          <input
-            type="file"
-            name="productImg"
-            id="productImg"
-            accept="image/png, image/jpeg, image/jpg"
-            onChange={(e) => setImageFiles(e.target.files[0])}
-            onClick={(e) => e.target.value = null}
-            // multiple
-          />
         </div>
         {errors.imageFiles && <p>{errors.imageFiles}</p>}
         {console.log(errors)}
         <button type="submit">Submit</button>
-      </form>
+      </form> : null}
     </div>
   )
 }

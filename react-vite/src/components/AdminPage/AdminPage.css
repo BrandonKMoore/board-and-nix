@@ -19,3 +19,27 @@
   justify-content: center;
   align-items: center;
 }
+
+.adminPage > .main-content {
+  display: flex;
+  padding: 50px 0;
+  .main-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: cent;
+  }
+}
+
+.adminPage > .main-content > .left-section {
+  width: 20%;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  li {
+    cursor: pointer;
+  }
+}

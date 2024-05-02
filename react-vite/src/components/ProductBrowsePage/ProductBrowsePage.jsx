@@ -9,7 +9,7 @@ export default function ProductBrowsePage(){
   const dispatch = useDispatch()
   const allProducts = useSelector(state => state.product.allProducts)
 
-  if (!allProducts) return <span>Loading...</span>
+  if (!allProducts) return
   return(
     <div className="productBrowserPage">
       <div className="hero">
