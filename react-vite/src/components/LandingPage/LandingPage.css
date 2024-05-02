@@ -31,11 +31,11 @@
   padding-top: 15%;
   padding-left: 30%;
   align-items: start;
-  h1 {
+  :is(h1) {
     font-size: 3rem;
     color: brown
   }
-  button {
+  :is(button) {
     cursor: pointer;
     background-color: brown;
     color: white;

@@ -1,4 +1,3 @@
-import ProductBrowsePage from '../ProductBrowsePage/ProductBrowsePage'
 import { useNavigate } from 'react-router-dom'
 import './LandingPage.css'
 

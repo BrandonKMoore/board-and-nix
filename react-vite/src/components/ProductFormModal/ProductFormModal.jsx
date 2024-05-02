@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import './ProductForm.css'
 import { thunkAddProduct } from "../../redux/product";
 
 export default function ProductFormModal(){
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [errors, setErrors] = useState({})
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
@@ -15,10 +15,8 @@ export default function ProductFormModal(){
   const [dimension_w, setDimension_w] = useState("")
   const [dimension_h, setDimension_h] = useState("")
   const [customizable, setCustomizable] = useState(false)
-  const [imageFiles, setImageFiles] = useState()
-  const [imageIsCover, setImageIsCover] = useState(true)
-  const [modalPage, setModalPage] = useState(1)
 
+  const [modalPage, setModalPage] = useState(1)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,7 +32,7 @@ export default function ProductFormModal(){
       if (!dimension_h) dimensionError += ' height'
       newError.dimension = dimensionError
     }
-    if (!imageFiles || imageFiles.length > 5) newError.imageFiles = 'Please upload 1 to 5 product pictures'
+
 
     if (Object.entries(newError).length > 0) return setErrors(newError)
 
@@ -45,13 +43,15 @@ export default function ProductFormModal(){
     productFormData.append('dimension_l', dimension_l)
     productFormData.append('dimension_w', dimension_w)
     productFormData.append('dimension_h', dimension_h)
+    productFormData.append('customizable', customizable)
 
     const serverResponse = await dispatch(thunkAddProduct(productFormData))
 
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      // navigate("/");
+      setModalPage(2)
+      alert('modalPage set to 2... second form in process')
     }
   }
 
@@ -83,7 +83,7 @@ export default function ProductFormModal(){
         {errors.price && <p>{errors.price}</p>}
         <div className="dimensions">
           <span>Dimensions: </span>
-          <label>
+          <label className="size">
             <input
               type="number"
               step=".01"
@@ -93,7 +93,7 @@ export default function ProductFormModal(){
               />
           </label>
           <div>in x</div>
-          <label>
+          <label className="size">
             <input
               type="number"
               step=".01"
@@ -103,7 +103,7 @@ export default function ProductFormModal(){
               />
           </label>
           <div>in x</div>
-          <label>
+          <label className="size">
             <input
               type="number"
               step=".01"
@@ -117,7 +117,7 @@ export default function ProductFormModal(){
         {errors.dimension && <p>{errors.dimension}</p>}
         <div className="customizable">
           <span>Customizable: </span>
-          <label>
+          <label className="options">
             <input
               type="radio"
               value={true}
@@ -126,7 +126,7 @@ export default function ProductFormModal(){
             />
             True
           </label>
-          <label >
+          <label className="options">
             <input
               type="radio"
               value={false}

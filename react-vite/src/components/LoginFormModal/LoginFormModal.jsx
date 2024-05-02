@@ -35,7 +35,7 @@ function LoginFormModal() {
       } else {
         closeModal();
       }
-    };
+    }
   }
 
 

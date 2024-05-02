@@ -51,7 +51,7 @@ export default function ProductPage(){
               <div className='quantity'>
                 <span>Quantity:</span>
               </div>
-              <button>Add to cart</button>
+              <button onClick={()=> alert('Feature Coming Soon')}>Add to cart</button>
             </div>
           </div>
         </div>

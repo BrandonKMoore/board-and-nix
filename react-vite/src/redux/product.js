@@ -52,8 +52,8 @@ export const thunkAddProduct = (data) => async (dispatch) => {
     if (data.errors) {
       return console.log(`Error with response from thunkAddProduct: ${data.errors}`)
     }
+    dispatch(setProduct(data))
     return data.new_product
-    // dispatch(setProduct(data))
   }
 };
 

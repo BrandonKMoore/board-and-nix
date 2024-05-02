@@ -1,12 +1,11 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useModal } from '../../context/Modal';
 import LoginFormModal from '../LoginFormModal'
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 import { IoPersonOutline } from "react-icons/io5";
 import { PiShoppingCartSimple  } from "react-icons/pi";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import { thunkLogout } from "../../redux/session";
@@ -14,10 +13,8 @@ import { thunkLogout } from "../../redux/session";
 function Navigation() {
   const [showMenu, setShowMenu ] = useState(false)
   const user = useSelector(state => state.session.user)
-  const { setModalContent } = useModal();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const ulRef = useRef();
 
   const handleMenuClick = () => {
     setShowMenu(!showMenu)

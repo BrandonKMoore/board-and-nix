@@ -40,7 +40,7 @@
   border: 2px solid black;
   border-radius: 5px;
   padding: 5px;
-  li {
+  :is(li) {
     list-style: none;
     user-select: none;
   }
