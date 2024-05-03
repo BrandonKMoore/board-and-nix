@@ -62,3 +62,43 @@
 .selection > button {
   width: 100%;
 }
+
+.product-reviews > .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.product-reviews > form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  /* align-items: center; */
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0;
+  :is(textarea){
+    min-height: 60px;
+    padding: 5px
+
+  }
+}
+
+.review-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.review-rating {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.review-buttons > .button {
+  background-color: gray;
+  padding: 2px 5px;
+  border: 2px solid black;
+  cursor: pointer;
+  user-select: none;
+}

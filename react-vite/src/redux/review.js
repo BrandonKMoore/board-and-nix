@@ -1,8 +1,25 @@
-const SET_ALL_REVIEWS = 'product/setAllReviews'
+const SET_ALL_REVIEWS = 'review/setAllReviews'
+const ADD_NEW_REVIEW = 'review/addNewReview'
+const EDIT_REVIEW = 'review/editReview'
+const REMOVE_REVIEW = 'review/removeReview'
 
 const setAllReviews = (allReviews) => ({
   type: SET_ALL_REVIEWS,
   payload: allReviews
+})
+
+const addNewReview = (review) => ({
+  type: ADD_NEW_REVIEW,
+  payload: review
+})
+
+const editReview = (review) => ({
+  type: EDIT_REVIEW,
+  payload: review
+})
+const removeReview = (reviewId) => ({
+  type: REMOVE_REVIEW,
+  payload: reviewId
 })
 
 export const thunkGetAllReviews = () => async (dispatch) => {
@@ -16,12 +33,72 @@ export const thunkGetAllReviews = () => async (dispatch) => {
   }
 };
 
+export const thunkAddNewReview = (data) => async (dispatch) => {
+  const response = await fetch("/api/reviews/", {
+    method: "POST",
+    body: data
+  })
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return console.log(`Error with response from thunkGetAllReviews: ${data.errors}`)
+    }
+    dispatch(addNewReview(data))
+  }
+};
+
+export const thunkEditReview = (data, review) => async (dispatch) => {
+  console.log(review.id)
+  const response = await fetch(`/api/reviews/${review.id}`, {
+    method: "PUT",
+    body: data
+  })
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return console.log(`Error with response from thunkGetAllReviews: ${data.errors}`)
+    }
+    dispatch(editReview(data))
+  }
+};
+
+export const thunkRemoveReviewById = (reviewId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE"
+  })
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return console.log(`Error with response from thunkGetAllReviews: ${data.errors}`)
+    }
+    dispatch(removeReview(reviewId))
+  }
+};
+
 const initialState = { allReviews: null }
+let newState = {}
 
 function reviewReducer(state = initialState, action) {
   switch (action.type) {
     case SET_ALL_REVIEWS:
       return { ...state, allReviews: action.payload };
+    case ADD_NEW_REVIEW:
+      newState = {...state}
+      const addedReview = action.payload.new_review
+      newState.allReviews[addedReview.id] = addedReview
+      return {...newState}
+    case EDIT_REVIEW:
+      newState = {...state}
+      const editedReview = action.payload.updated_review
+      newState.allReviews[editedReview.id] = editedReview
+      return {...newState}
+    case REMOVE_REVIEW:
+      console.log(action.payload)
+      newState = {...state}
+      console.log(newState.allReviews[action.payload])
+      delete newState.allReviews[action.payload]
+      console.log(newState.allReviews[action.payload])
+      return {...newState}
     default:
       return state
   }

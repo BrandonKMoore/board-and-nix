@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import "./ProductBrowsePage.css"
 
 export default function ProductBrowsePage(){
-  const allProducts = useSelector(state => state.product.allProducts)
+  const allProductsObj = useSelector(state => state.product.allProducts)
+  if (!allProductsObj) return
 
-  if (!allProducts) return
+  const allProducts = Object.values(allProductsObj)
   return(
     <div className="productBrowserPage">
       <div className="hero">

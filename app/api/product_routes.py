@@ -1,6 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, request,jsonify
 from app.models import Product, ProductImage, db
 from app.forms import NewProductForm, NewImageForm
+from datetime import datetime
 
 product_routes = Blueprint('products', __name__)
 
@@ -9,10 +10,8 @@ product_routes = Blueprint('products', __name__)
 def get_all_products():
   all_products = Product.query.all()
 
-  all_products_response = []
-  for product in all_products:
-    product_dict = product.to_dict()
-    all_products_response.append(product_dict)
+
+  all_products_response = {product.id: product.to_dict() for product in all_products}
 
   return {'products': all_products_response}
 
@@ -47,7 +46,9 @@ def create_product():
       price = productForm.data['price'],
       dimension_l = productForm.data['dimension_l'],
       dimension_w = productForm.data['dimension_w'],
-      dimension_h = productForm.data['dimension_h']
+      dimension_h = productForm.data['dimension_h'],
+      created_at = datetime.now(),
+      updated_at = datetime.now()
     )
 
 

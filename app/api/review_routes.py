@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.models import Review, db
 from app.forms import ReviewForm
+from datetime import datetime
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -9,7 +10,8 @@ review_routes = Blueprint('reviews', __name__)
 def get_all_reviews():
   all_reviews = Review.query.all()
 
-  all_reviews_response = [review.to_dict() for review in all_reviews]
+  # all_reviews_response = [review.to_dict() for review in all_reviews]
+  all_reviews_response = {review.id:review.to_dict() for review in all_reviews}
 
   return ({'all_reviews': all_reviews_response})
 
@@ -23,9 +25,10 @@ def create_review():
       user_id = reviewForm.data['user_id'],
       product_id = reviewForm.data['product_id'],
       body = reviewForm.data['body'],
-      stars = reviewForm.data['stars']
+      stars = reviewForm.data['stars'],
+      created_at = datetime.now(),
+      updated_at = datetime.now()
     )
-
 
     db.session.add(new_review)
     db.session.commit()
