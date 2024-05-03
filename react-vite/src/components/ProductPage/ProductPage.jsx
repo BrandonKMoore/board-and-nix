@@ -65,6 +65,7 @@ export default function ProductPage(){
   }
 
   const handleReviewCancel = (e) => {
+    e.preventDefault()
     resetReviewForm()
   }
 

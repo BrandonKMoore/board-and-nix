@@ -84,20 +84,16 @@ function reviewReducer(state = initialState, action) {
       return { ...state, allReviews: action.payload };
     case ADD_NEW_REVIEW:
       newState = {...state}
-      const addedReview = action.payload.new_review
-      newState.allReviews[addedReview.id] = addedReview
+      newState.allReviews[action.payload.new_review.id] = action.payload.new_review
       return {...newState}
     case EDIT_REVIEW:
       newState = {...state}
-      const editedReview = action.payload.updated_review
-      newState.allReviews[editedReview.id] = editedReview
+      newState.allReviews[action.payload.updated_review.id] = action.payload.updated_review
       return {...newState}
     case REMOVE_REVIEW:
       console.log(action.payload)
       newState = {...state}
-      console.log(newState.allReviews[action.payload])
       delete newState.allReviews[action.payload]
-      console.log(newState.allReviews[action.payload])
       return {...newState}
     default:
       return state
