@@ -42,17 +42,16 @@ def create_product():
       url=None
       if image:
         image.filename = get_unique_filename(image.filename)
-        image_urls.append(image.filename)
         upload = upload_file_to_s3(image)
-        print('1------>>>>>>>>', image.filename)
-        print('2------>>>>>>>>', upload)
         if "url" not in upload:
             return {"product_image": "Failed to upload image, try again later."},500
         url=upload["url"]
+        image_urls.append(url)
 
     print(image_urls)
 
     new_product = Product(
+      user_id = productForm.data['user_id'],
       customizable = productForm.data['customizable'],
       name = productForm.data['name'],
       description = productForm.data['description'],
@@ -64,15 +63,20 @@ def create_product():
       updated_at = datetime.now()
     )
 
-    # db.session.add(new_product)
-    # db.session.commit()
+    db.session.add(new_product)
+    db.session.commit()
 
-    for url in image_urls:
-      new_image = ProductImage(
+    all_images = []
+    for idx, url in enumerate(image_urls):
+      print(idx)
+      all_images.append(ProductImage(
         product_id = new_product.id,
         image_url = url,
-        # is_cover = url == image_urls[0] ? True 
-      )
+        is_cover = True if url == image_urls[0] else False
+      ))
+
+    db.session.add_all(all_images)
+    db.session.commit()
 
     result = new_product.to_dict()
 
@@ -111,6 +115,9 @@ def update_product(id):
 @product_routes.route('/<int:id>', methods=['DELETE'])
 def delete_product(id):
   product = Product.query.filter(Product.id == id).one()
+
+  for image in product.product_images:
+    remove_file_from_s3(image.image_url)
 
   db.session.delete(product)
   db.session.commit()

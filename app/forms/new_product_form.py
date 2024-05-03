@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DecimalField, BooleanField, FileField, MultipleFileField
+from wtforms import StringField, DecimalField, BooleanField, MultipleFileField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Product
 
@@ -10,6 +10,7 @@ def product_exist(form, field):
     raise ValidationError('A product with the provided name already exist')
 
 class NewProductForm(FlaskForm):
+  user_id = IntegerField('user_id', validators=[DataRequired()])
   name = StringField('name', validators=[DataRequired()])
   description = StringField('description', validators=[DataRequired()])
   price = DecimalField('price', places=2, validators=[DataRequired()])
