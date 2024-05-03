@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 class Product(db.Model):
@@ -8,6 +8,7 @@ class Product(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
   name = db.Column(db.String(100), nullable=False, unique=True)
   description = db.Column(db.String, nullable=False)
   price = db.Column(db.Float, nullable=False)
@@ -20,6 +21,7 @@ class Product(db.Model):
 
   product_images = db.relationship('ProductImage', back_populates='product', cascade="all, delete-orphan")
   reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan")
+  user = db.relationship('User', back_populates='products')
 
   def get_dimensions(self):
     if self.dimension_l and self.dimension_l and self.dimension_w:
@@ -30,6 +32,7 @@ class Product(db.Model):
     return {
       'id': self.id,
       'name': self.name,
+      'user_id': self.user_id,
       'description': self.description,
       'price': self.price,
       'dimension_l': self.dimension_l,

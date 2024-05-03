@@ -46,6 +46,7 @@ def seed_products():
 
     for name in names:
         product = Product(
+            user_id = randint(1, 3),
             name = name,
             description = choice(descriptions),
             price = randint(200, 1000) + 0.99,
