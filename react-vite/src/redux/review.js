@@ -27,7 +27,7 @@ export const thunkGetAllReviews = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllReviews: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(setAllReviews(data.all_reviews))
   }
@@ -41,14 +41,13 @@ export const thunkAddNewReview = (data) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllReviews: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(addNewReview(data))
   }
 };
 
 export const thunkEditReview = (data, review) => async (dispatch) => {
-  console.log(review.id)
   const response = await fetch(`/api/reviews/${review.id}`, {
     method: "PUT",
     body: data
@@ -56,7 +55,7 @@ export const thunkEditReview = (data, review) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllReviews: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(editReview(data))
   }
@@ -69,7 +68,7 @@ export const thunkRemoveReviewById = (reviewId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllReviews: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(removeReview(reviewId))
   }
@@ -91,8 +90,7 @@ function reviewReducer(state = initialState, action) {
       newState.allReviews[action.payload.updated_review.id] = action.payload.updated_review
       return {...newState}
     case REMOVE_REVIEW:
-      console.log(action.payload)
-      newState = {...state}
+      newState = {allReviews: {...state.allReviews} }
       delete newState.allReviews[action.payload]
       return {...newState}
     default:

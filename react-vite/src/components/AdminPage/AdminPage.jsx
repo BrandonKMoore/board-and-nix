@@ -1,19 +1,20 @@
-import ProductFormModal from '../ProductFormModal/ProductFormModal'
+import ProductFormModal from '../ProductFormModal'
 import { useSelector } from 'react-redux'
 import './AdminPage.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ManageProduct from '../ManageProduct'
 
 export default function AdminPage(){
   const navigate = useNavigate()
   const user = useSelector(state => state.session.user)
   const [render, setRender] = useState('')
-  console.log(user.username != 'Demo')
   if (!user) return <span>Loading...</span>
   if (user.username != 'Demo'){
     alert('You have to be the administrator to use this feature')
     navigate('/')
   }
+
   return (
     <div className="adminPage">
       <div className='hero'>
@@ -26,8 +27,7 @@ export default function AdminPage(){
       <div className='main-content container'>
         <ul className='left-section'>
           <li className='selection' onClick={()=> setRender(<ProductFormModal />)}>Create Product</li>
-          <li className='selection' onClick={()=> alert('Feature Coming Soon')}>Edit Product</li>
-          <li className='selection' onClick={()=> alert('Feature Coming Soon')}>Delete Product</li>
+          <li className='selection' onClick={()=> setRender(<ManageProduct />)}>Manage Product</li>
         </ul>
         <div className='main-section'>
             {render}
