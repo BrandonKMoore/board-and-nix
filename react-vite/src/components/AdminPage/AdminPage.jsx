@@ -8,7 +8,6 @@ export default function AdminPage(){
   const navigate = useNavigate()
   const user = useSelector(state => state.session.user)
   const [render, setRender] = useState('')
-  console.log(user.username != 'Demo')
   if (!user) return <span>Loading...</span>
   if (user.username != 'Demo'){
     alert('You have to be the administrator to use this feature')

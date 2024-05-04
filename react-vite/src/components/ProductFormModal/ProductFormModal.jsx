@@ -1,12 +1,13 @@
-import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkAddProduct } from "../../redux/product";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import './ProductForm.css'
-import { thunkAddProduct } from "../../redux/product";
 
 export default function ProductFormModal(){
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const user = useSelector(state => state.session.user)
   const [errors, setErrors] = useState({})
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
@@ -16,7 +17,6 @@ export default function ProductFormModal(){
   const [dimension_h, setDimension_h] = useState("")
   const [customizable, setCustomizable] = useState(false)
 
-  const [modalPage, setModalPage] = useState(1)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,11 +33,11 @@ export default function ProductFormModal(){
       newError.dimension = dimensionError
     }
 
-
     if (Object.entries(newError).length > 0) return setErrors(newError)
 
-    const productFormData = new FormData()
+    const productFormData = new FormData(e.currentTarget)
     productFormData.append('name', name)
+    productFormData.append('user_id', user.id)
     productFormData.append('price', price)
     productFormData.append('description', description)
     productFormData.append('dimension_l', dimension_l)
@@ -47,19 +47,18 @@ export default function ProductFormModal(){
 
     const serverResponse = await dispatch(thunkAddProduct(productFormData))
 
-    if (serverResponse) {
-      setErrors(serverResponse);
+    if (Object.entries(serverResponse).length < 2) {
+      console.log(serverResponse)
+      setErrors(serverResponse.error)
     } else {
-      setModalPage(2)
-      alert('modalPage set to 2... second form in process')
+      navigate(`/products/${serverResponse.id}`)
     }
   }
 
 
   return (
     <div className="newProductForm">
-    {modalPage === 1 ?
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
     {errors.server && <p>{errors.server}</p>}
       <h1>New Product Form</h1>
         <label>
@@ -121,7 +120,6 @@ export default function ProductFormModal(){
             <input
               type="radio"
               value={true}
-              name="customizable"
               onChange={(e) => setCustomizable(e.target.value)}
             />
             True
@@ -130,7 +128,6 @@ export default function ProductFormModal(){
             <input
               type="radio"
               value={false}
-              name="customizable"
               defaultChecked={true}
               onChange={(e) => setCustomizable(e.target.value)}
             />
@@ -150,12 +147,11 @@ export default function ProductFormModal(){
         <div className="uploadImg">
           <label>
             <span>Upload product picture(s): </span>
+            <input type="file" name='image_files' accept='image/*' alt="" multiple/>
           </label>
         </div>
-        {errors.imageFiles && <p>{errors.imageFiles}</p>}
-        {console.log(errors)}
         <button type="submit">Submit</button>
-      </form> : null}
+      </form>
     </div>
   )
 }

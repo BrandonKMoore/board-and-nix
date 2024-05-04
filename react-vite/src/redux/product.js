@@ -21,7 +21,7 @@ export const thunkGetAllProducts = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllProducts: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(setAllProducts(data.products))
   }
@@ -31,28 +31,29 @@ export const thunkGetProductById = (productId) => async (dispatch) => {
   const response = await fetch(`/api/products/${productId}`)
   if (response.ok) {
     const data = await response.json();
+
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllProducts: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(setProduct(data))
   }
 };
 
 export const thunkAddProduct = (data) => async (dispatch) => {
-  // data.entries().map(([key, value]) => console.log(key, ':', value))
-  for (const [key, value] of data.entries()) {
-    console.log("product====>", key, "= ", value);
-}
   const response = await fetch('/api/products/', {
     method: "POST",
+    headers: {
+      "enctype": "multipart/form-data"
+    },
     body: data
   })
+
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkAddProduct: ${data.errors}`)
+      return {'error': data.errors}
     }
-    dispatch(setProduct(data))
+    dispatch(setProduct(data.new_product))
     return data.new_product
   }
 };
@@ -65,7 +66,7 @@ export const thunkUpdateProductById = (data) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllProducts: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(setProduct(data))
   }
@@ -78,7 +79,7 @@ export const thunkRemoveProductById = (productId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return console.log(`Error with response from thunkGetAllProducts: ${data.errors}`)
+      return {'error': data.errors}
     }
     dispatch(removeProduct(data))
   }
@@ -86,12 +87,17 @@ export const thunkRemoveProductById = (productId) => async (dispatch) => {
 
 const initialState = { allProducts: null, product: null }
 
+
 function productReducer(state = initialState, action) {
+  let newState = {}
   switch (action.type) {
     case SET_ALL_PRODUCTS:
       return { ...state, allProducts: action.payload };
     case SET_PRODUCT:
-      return { ...state, product: action.payload }
+      newState = {...state}
+      newState.allProducts[action.payload.id] = action.payload
+      newState['product'] = action.payload
+      return { ...newState }
     case REMOVE_PRODUCT:
       return { ...state, product: null }
     default:

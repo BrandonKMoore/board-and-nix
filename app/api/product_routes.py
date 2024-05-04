@@ -35,10 +35,9 @@ def get_product_by_id(id):
 def create_product():
   productForm = NewProductForm()
   productForm['csrf_token'].data = request.cookies['csrf_token']
-
   if productForm.validate_on_submit():
     image_urls = []
-    for image in productForm.image_url.data:
+    for image in request.files.getlist('image_files'):
       url=None
       if image:
         image.filename = get_unique_filename(image.filename)
@@ -47,8 +46,6 @@ def create_product():
             return {"product_image": "Failed to upload image, try again later."},500
         url=upload["url"]
         image_urls.append(url)
-
-    print(image_urls)
 
     new_product = Product(
       user_id = productForm.data['user_id'],
@@ -68,7 +65,6 @@ def create_product():
 
     all_images = []
     for idx, url in enumerate(image_urls):
-      print(idx)
       all_images.append(ProductImage(
         product_id = new_product.id,
         image_url = url,

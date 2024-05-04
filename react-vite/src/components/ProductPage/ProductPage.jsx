@@ -24,6 +24,8 @@ export default function ProductPage(){
     dispatch(thunkGetProductById(productId))
   }, [dispatch, productId])
 
+  if (!product || product.id != productId || !allReviewsObj) return null
+
   const resetReviewForm = () => {
     setIsNew(true)
     setReviewStars(0)
@@ -85,14 +87,12 @@ export default function ProductPage(){
   }
 
 
-  if (!product || product.id != productId || !allReviewsObj) return
   if (!mainImage) setMainImage(product.Images.find(product => product.is_cover === true).image_url)
 
   let productReviews
 
   productReviews = Object.values(allReviewsObj).filter(review => review.product_id == productId).sort((a , b)=> new Date(b.created_at) - new Date(a.created_at))
 
-  console.log(productReviews)
   return (
     <div className="productPage">
       <div className='container'>
