@@ -59,8 +59,8 @@ export const thunkAddProduct = (data) => async (dispatch) => {
   }
 };
 
-export const thunkUpdateProductById = (data) => async (dispatch) => {
-  const response = await fetch(`/api/products/${data.id}`, {
+export const thunkUpdateProductById = (data, productId) => async (dispatch) => {
+  const response = await fetch(`/api/products/${productId}`, {
     method: "PUT",
     body: data
   })
@@ -70,6 +70,7 @@ export const thunkUpdateProductById = (data) => async (dispatch) => {
       return {'error': data.errors}
     }
     dispatch(setProduct(data))
+    return data.updated_product
   }
 };
 
@@ -96,13 +97,14 @@ function productReducer(state = initialState, action) {
       return { ...state, allProducts: action.payload };
     case SET_PRODUCT:
       newState = {...state}
-      newState.allProducts[action.payload.id] = action.payload
+      const product = action.payload
+      newState.allProducts[product.id] = product
       newState['product'] = action.payload
       return { ...newState }
     case REMOVE_PRODUCT:
-      newState = {...state }
-      delete newState.allProducts[action.payload]
-      return { ...newState, product: null }
+      const allProducts = { ...state.allProducts }
+      delete allProducts[action.payload]
+      return { allProducts: {...allProducts}, product: null }
     default:
       return state
   }

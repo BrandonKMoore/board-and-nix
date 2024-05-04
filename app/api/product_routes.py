@@ -91,7 +91,18 @@ def update_product(id):
   form = NewProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    product.name = form.data['name']
+    image_urls = []
+    for image in request.files.getlist('image_files'):
+      url=None
+      if image:
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            return {"product_image": "Failed to upload image, try again later."},500
+        url=upload["url"]
+        image_urls.append(url)
+
+    if product.name is not form.data['name']: product.name = form.data['name']
     product.customizable = form.data['customizable']
     product.description = form.data['description']
     product.price = form.data['price']
@@ -100,6 +111,15 @@ def update_product(id):
     product.dimension_h = form.data['dimension_h']
 
 
+    all_images = []
+    for idx, url in enumerate(image_urls):
+      all_images.append(ProductImage(
+        product_id = product.id,
+        image_url = url,
+        is_cover = True if url == image_urls[0] else False
+      ))
+
+    if len(all_images) > 0: db.session.add_all(all_images)
     db.session.commit()
 
     result = product.to_dict()

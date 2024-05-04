@@ -1,21 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { thunkAddProduct } from "../../redux/product";
+import { thunkAddProduct, thunkUpdateProductById} from "../../redux/product";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useModal } from "../../context/Modal";
 import './ProductForm.css'
 
-export default function ProductFormModal(){
+export default function ProductFormModal({props}){
+  const { closeModal } = useModal()
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(state => state.session.user)
   const [errors, setErrors] = useState({})
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [price, setPrice] = useState("")
-  const [dimension_l, setDimension_l] = useState("")
-  const [dimension_w, setDimension_w] = useState("")
-  const [dimension_h, setDimension_h] = useState("")
-  const [customizable, setCustomizable] = useState(false)
+  const [name, setName] = useState(props?.name || "")
+  const [description, setDescription] = useState(props?.description || "")
+  const [price, setPrice] = useState(props?.price || "")
+  const [dimension_l, setDimension_l] = useState(props?.dimension_l || "")
+  const [dimension_w, setDimension_w] = useState(props?.dimension_w || "")
+  const [dimension_h, setDimension_h] = useState(props?.dimension_h || "")
+  const [customizable, setCustomizable] = useState(props?.customizable || false)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +36,7 @@ export default function ProductFormModal(){
       newError.dimension = dimensionError
     }
 
+
     if (Object.entries(newError).length > 0) return setErrors(newError)
 
     const productFormData = new FormData(e.currentTarget)
@@ -45,13 +49,21 @@ export default function ProductFormModal(){
     productFormData.append('dimension_h', dimension_h)
     productFormData.append('customizable', customizable)
 
-    const serverResponse = await dispatch(thunkAddProduct(productFormData))
-
-    if (Object.entries(serverResponse).length < 2) {
-      console.log(serverResponse)
-      setErrors(serverResponse.error)
+    let serverResponse;
+    if(props){
+      productFormData.append('product_id', props.id || null)
+      serverResponse = await dispatch(thunkUpdateProductById(productFormData, props.id))
     } else {
-      navigate(`/products/${serverResponse.id}`)
+      serverResponse = await dispatch(thunkAddProduct(productFormData))
+    }
+
+    if (serverResponse){
+      if (Object.entries(serverResponse).length < 2) {
+        setErrors(serverResponse.error)
+      } else {
+        navigate(`/products/${serverResponse.id}`)
+        closeModal()
+      }
     }
   }
 

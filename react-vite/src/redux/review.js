@@ -90,7 +90,7 @@ function reviewReducer(state = initialState, action) {
       newState.allReviews[action.payload.updated_review.id] = action.payload.updated_review
       return {...newState}
     case REMOVE_REVIEW:
-      newState = {...state}
+      newState = {allReviews: {...state.allReviews} }
       delete newState.allReviews[action.payload]
       return {...newState}
     default:

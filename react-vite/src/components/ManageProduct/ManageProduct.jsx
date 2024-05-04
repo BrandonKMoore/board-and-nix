@@ -1,10 +1,11 @@
+import ProductFormModal from "../ProductFormModal"
+import DeleteConfirmation from "../DeleteConfirmation"
+import OpenModalButton from "../OpenModalButton/OpenModalButton"
+import { thunkRemoveProductById } from "../../redux/product"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import "./ManageProduct.css"
-import OpenModalButton from "../OpenModalButton/OpenModalButton"
-import DeleteConfirmation from "../DeleteConfirmation/DeleteConfirmation"
-import { thunkRemoveProductById } from "../../redux/product"
 import { useEffect } from "react"
+import "./ManageProduct.css"
 
 export default function ManageProduct(){
   const user = useSelector(state => state.session.user)
@@ -16,7 +17,6 @@ export default function ManageProduct(){
   }, [thunkRemoveProductById])
 
   const userProducts = Object.values(allProductsObj).filter(product => product.user_id == user.id).sort((a , b)=> new Date(b.created_at) - new Date(a.created_at))
-  console.log(userProducts)
   if (!userProducts) return null
   return (
     <div className="manage-product-list">
@@ -30,7 +30,10 @@ export default function ManageProduct(){
           <span>From ${product.price}</span>
         </div>
         <div>
-          <button onClick={()=> <DeleteConfirmation />}>Edit</button>
+          <OpenModalButton
+            modalComponent={<ProductFormModal props={product}/>}
+            buttonText='Edit'
+          />
           <OpenModalButton
             modalComponent={<DeleteConfirmation props={[product, thunkRemoveProductById]}/>}
             buttonText='Delete'

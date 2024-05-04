@@ -1,9 +1,9 @@
-import ProductFormModal from '../ProductFormModal/ProductFormModal'
+import ProductFormModal from '../ProductFormModal'
 import { useSelector } from 'react-redux'
 import './AdminPage.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import ManageProduct from '../ManageProduct/ManageProduct'
+import ManageProduct from '../ManageProduct'
 
 export default function AdminPage(){
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ export default function AdminPage(){
     alert('You have to be the administrator to use this feature')
     navigate('/')
   }
-  
+
   return (
     <div className="adminPage">
       <div className='hero'>
