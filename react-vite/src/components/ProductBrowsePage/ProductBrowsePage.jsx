@@ -6,7 +6,7 @@ export default function ProductBrowsePage(){
   const allProductsObj = useSelector(state => state.product.allProducts)
   if (!allProductsObj) return
 
-  const allProducts = Object.values(allProductsObj)
+  const allProducts = Object.values(allProductsObj).sort((a , b)=> new Date(b.created_at) - new Date(a.created_at))
   return(
     <div className="productBrowserPage">
       <div className="hero">

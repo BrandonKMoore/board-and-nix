@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import './AdminPage.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ManageProduct from '../ManageProduct/ManageProduct'
 
 export default function AdminPage(){
   const navigate = useNavigate()
@@ -13,6 +14,7 @@ export default function AdminPage(){
     alert('You have to be the administrator to use this feature')
     navigate('/')
   }
+  
   return (
     <div className="adminPage">
       <div className='hero'>
@@ -25,8 +27,7 @@ export default function AdminPage(){
       <div className='main-content container'>
         <ul className='left-section'>
           <li className='selection' onClick={()=> setRender(<ProductFormModal />)}>Create Product</li>
-          <li className='selection' onClick={()=> alert('Feature Coming Soon')}>Edit Product</li>
-          <li className='selection' onClick={()=> alert('Feature Coming Soon')}>Delete Product</li>
+          <li className='selection' onClick={()=> setRender(<ManageProduct />)}>Manage Product</li>
         </ul>
         <div className='main-section'>
             {render}

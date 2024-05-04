@@ -12,8 +12,9 @@ const setProduct = (product) => ({
   payload: product
 })
 
-const removeProduct = () => ({
-  type: REMOVE_PRODUCT
+const removeProduct = (productId) => ({
+  type: REMOVE_PRODUCT,
+  payload: productId
 })
 
 export const thunkGetAllProducts = () => async (dispatch) => {
@@ -81,7 +82,7 @@ export const thunkRemoveProductById = (productId) => async (dispatch) => {
     if (data.errors) {
       return {'error': data.errors}
     }
-    dispatch(removeProduct(data))
+    dispatch(removeProduct(productId))
   }
 };
 
@@ -99,7 +100,9 @@ function productReducer(state = initialState, action) {
       newState['product'] = action.payload
       return { ...newState }
     case REMOVE_PRODUCT:
-      return { ...state, product: null }
+      newState = {...state }
+      delete newState.allProducts[action.payload]
+      return { ...newState, product: null }
     default:
       return state
   }
