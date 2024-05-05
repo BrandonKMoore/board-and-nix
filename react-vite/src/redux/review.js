@@ -75,9 +75,9 @@ export const thunkRemoveReviewById = (reviewId) => async (dispatch) => {
 };
 
 const initialState = { allReviews: null }
-let newState = {}
 
 function reviewReducer(state = initialState, action) {
+  let newState = {}
   switch (action.type) {
     case SET_ALL_REVIEWS:
       return { ...state, allReviews: action.payload };
