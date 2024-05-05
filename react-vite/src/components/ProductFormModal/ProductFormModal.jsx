@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAddProduct, thunkUpdateProductById} from "../../redux/product";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import './ProductForm.css'
 
@@ -53,16 +53,15 @@ export default function ProductFormModal({props}){
     if(props){
       productFormData.append('product_id', props.id || null)
       serverResponse = await dispatch(thunkUpdateProductById(productFormData, props.id))
+      closeModal()
     } else {
       serverResponse = await dispatch(thunkAddProduct(productFormData))
+      navigate(`/products/${serverResponse.id}`)
     }
 
     if (serverResponse){
       if (Object.entries(serverResponse).length < 2) {
         setErrors(serverResponse.error)
-      } else {
-        navigate(`/products/${serverResponse.id}`)
-        closeModal()
       }
     }
   }

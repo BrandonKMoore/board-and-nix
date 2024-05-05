@@ -96,15 +96,14 @@ function productReducer(state = initialState, action) {
     case SET_ALL_PRODUCTS:
       return { ...state, allProducts: action.payload };
     case SET_PRODUCT:
-      newState = {...state}
-      const product = action.payload
-      newState.allProducts[product.id] = product
-      newState['product'] = action.payload
-      return { ...newState }
+      newState = { ...state, }
+      console.log(action.payload.updated_product)
+      newState.allProducts[action.payload.updated_product.id] = action.payload.updated_product
+      return { ...state, allProducts: {...newState.allProducts}, product: action.payload.updated_product }
     case REMOVE_PRODUCT:
-      const allProducts = { ...state.allProducts }
-      delete allProducts[action.payload]
-      return { allProducts: {...allProducts}, product: null }
+      newState = { allProducts: {...state.allProducts}}
+      delete newState.allProducts[action.payload]
+      return { ...state, allProducts: {...newState.allProducts}, product: null }
     default:
       return state
   }

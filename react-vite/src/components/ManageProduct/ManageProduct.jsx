@@ -4,17 +4,12 @@ import OpenModalButton from "../OpenModalButton/OpenModalButton"
 import { thunkRemoveProductById } from "../../redux/product"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { useEffect } from "react"
 import "./ManageProduct.css"
 
 export default function ManageProduct(){
   const user = useSelector(state => state.session.user)
   let allProductsObj = useSelector(state => state.product.allProducts)
   if (!allProductsObj) return
-
-  useEffect(()=>{
-    thunkRemoveProductById
-  }, [thunkRemoveProductById])
 
   const userProducts = Object.values(allProductsObj).filter(product => product.user_id == user.id).sort((a , b)=> new Date(b.created_at) - new Date(a.created_at))
   if (!userProducts) return null
