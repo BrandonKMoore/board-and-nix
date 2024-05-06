@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./ProductBrowsePage.css"
+import Footer from "../Footer";
 
 export default function ProductBrowsePage(){
   const allProductsObj = useSelector(state => state.product.allProducts)
@@ -30,6 +31,7 @@ export default function ProductBrowsePage(){
             </div>)}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

@@ -3,14 +3,13 @@
 }
 
 .landingPage .hero {
-  background-image: url("https://www.nickandalicia.com/wp-content/uploads/2020/06/Outdoor-Furniture-3826.jpg");
+  background-image: url("https://aa-project-3.s3.amazonaws.com/0013e806592c462abf73e3d1aa2d4c25.jpeg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   /* background-position: center -200px;  Great for 1080 and smaller */
   margin-top: -60px;
   background-position: 0px -150px;
-  background-size: 100%;
-  width: 100%;
+  background-size: cover;
   min-height: 200px;
   height: 100vh;
 }
@@ -31,9 +30,13 @@
   padding-top: 15%;
   padding-left: 30%;
   align-items: start;
+  text-shadow: 2px 2px 3px lightcoral;
   :is(h1) {
-    font-size: 3rem;
-    color: brown
+    > :is(span) {
+      font-size: 3rem;
+      display: flex;
+      color: brown;
+    };
   }
   :is(button) {
     cursor: pointer;
@@ -42,5 +45,6 @@
     border: none;
     border-radius: 30px;
     padding: 20px 40px;
+    box-shadow: 2px 2px 10px lightcoral;
   }
 }

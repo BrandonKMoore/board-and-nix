@@ -69,7 +69,7 @@ export const thunkUpdateProductById = (data, productId) => async (dispatch) => {
     if (data.errors) {
       return {'error': data.errors}
     }
-    dispatch(setProduct(data))
+    dispatch(setProduct(data.updated_product))
     return data.updated_product
   }
 };
@@ -97,9 +97,8 @@ function productReducer(state = initialState, action) {
       return { ...state, allProducts: action.payload };
     case SET_PRODUCT:
       newState = { ...state, }
-      console.log(action.payload.updated_product)
-      newState.allProducts[action.payload.updated_product.id] = action.payload.updated_product
-      return { ...state, allProducts: {...newState.allProducts}, product: action.payload.updated_product }
+      newState.allProducts[action.payload.id] = action.payload
+      return { ...state, allProducts: {...newState.allProducts}, product: action.payload }
     case REMOVE_PRODUCT:
       newState = { allProducts: {...state.allProducts}}
       delete newState.allProducts[action.payload]

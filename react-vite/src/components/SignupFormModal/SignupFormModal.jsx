@@ -39,34 +39,34 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className="signupModal">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className='.signupModalForm' onSubmit={handleSubmit}>
         <label>
-          Email
           <input
             type="text"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="signupErrors">{errors.email}</p>}
         <label>
-          Username
           <input
             type="text"
             value={username}
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
         <label>
-          Password
           <input
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -74,18 +74,18 @@ function SignupFormModal() {
         </label>
         {errors.password && <p>{errors.password}</p>}
         <label>
-          Confirm Password
           <input
             type="password"
+            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button className='signupBtn'  type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
