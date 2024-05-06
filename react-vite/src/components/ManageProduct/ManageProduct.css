@@ -29,3 +29,12 @@
   color: white
   }
 }
+
+.manage-product-list > .info {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  * {
+    color: brown
+  }
+}

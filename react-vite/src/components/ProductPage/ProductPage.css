@@ -104,6 +104,7 @@
   border: 2px solid lightcoral;
   border-radius: 15px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .product-reviews > .header {

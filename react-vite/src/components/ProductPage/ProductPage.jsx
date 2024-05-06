@@ -128,7 +128,7 @@ export default function ProductPage(){
                 <label>Quantity:</label>
                 <input type="number" min="1" max="10" />
               </div>
-              <button onClick={()=> alert('Feature Coming Soon')}>Add to cart</button>
+              <button className="add-to-cart" onClick={()=> alert('Feature Coming Soon')}>Add to cart</button>
             </div>
           </div>
         </div>
