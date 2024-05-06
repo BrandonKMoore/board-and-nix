@@ -8,8 +8,11 @@ export default function LandingPage(){
       <div className="hero">
         <div className="overlay">
           <div className="content">
-
-              <div><h1>Furnishing your life</h1><h1> with the natural</h1><h1>beauty of wood</h1></div>
+              <h1>
+                <span>Furnishing your life</span>
+                <span>with the natural</span>
+                <span>beauty of wood</span>
+              </h1>
               <button onClick={()=> navigate('/products')}>BROWSE COLLECTION</button>
           </div>
         </div>

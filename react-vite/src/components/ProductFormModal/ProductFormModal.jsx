@@ -17,7 +17,7 @@ export default function ProductFormModal({props}){
   const [dimension_l, setDimension_l] = useState(props?.dimension_l || "")
   const [dimension_w, setDimension_w] = useState(props?.dimension_w || "")
   const [dimension_h, setDimension_h] = useState(props?.dimension_h || "")
-  const [customizable, setCustomizable] = useState(props?.customizable || false)
+  const [customizable, setCustomizable] = useState(props?.customizable || "")
 
 
   const handleSubmit = async (e) => {
@@ -70,8 +70,8 @@ export default function ProductFormModal({props}){
   return (
     <div className="newProductForm">
     <form onSubmit={handleSubmit} encType="multipart/form-data">
-    {errors.server && <p>{errors.server}</p>}
-      <h1>New Product Form</h1>
+    {errors.server && <p className="errors">{errors.server}</p>}
+      <h1>Product Form</h1>
         <label>
           <input
             type="text"
@@ -80,7 +80,7 @@ export default function ProductFormModal({props}){
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-        {errors.name && <p>{errors.name}</p>}
+        {errors.name && <p className="errors">{errors.name}</p>}
         <label>
           <input
             type="number"
@@ -90,7 +90,7 @@ export default function ProductFormModal({props}){
             onChange={(e) => setPrice(e.target.value)}
             />
         </label>
-        {errors.price && <p>{errors.price}</p>}
+        {errors.price && <p className="errors">{errors.price}</p>}
         <div className="dimensions">
           <span>Dimensions: </span>
           <label className="size">
@@ -124,13 +124,14 @@ export default function ProductFormModal({props}){
           </label>
           <span>in</span>
         </div>
-        {errors.dimension && <p>{errors.dimension}</p>}
+        {errors.dimension && <p className="errors">{errors.dimension}</p>}
         <div className="customizable">
           <span>Customizable: </span>
           <label className="options">
             <input
               type="radio"
               value={true}
+              name="customizable"
               onChange={(e) => setCustomizable(e.target.value)}
             />
             True
@@ -139,13 +140,14 @@ export default function ProductFormModal({props}){
             <input
               type="radio"
               value={false}
+              name="customizable"
               defaultChecked={true}
               onChange={(e) => setCustomizable(e.target.value)}
             />
             False
           </label>
         </div>
-        {errors.customizable && <p>{errors.customizable}</p>}
+        {errors.customizable && <p className="errors">{errors.customizable}</p>}
         <label>
           <textarea cols={50} rows={10}
             type="text"
@@ -154,7 +156,7 @@ export default function ProductFormModal({props}){
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-        {errors.description && <p>{errors.description}</p>}
+        {errors.description && <p className="errors">{errors.description}</p>}
         <div className="uploadImg">
           <label>
             <span>Upload product picture(s): </span>

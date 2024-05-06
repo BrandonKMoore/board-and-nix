@@ -7,16 +7,16 @@ from random import choice, randint
 def seed_product_images():
 
     urls = [
-        "https://images.pexels.com/photos/447592/pexels-photo-447592.jpeg",
-        "https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg",
-        "https://images.pexels.com/photos/276651/pexels-photo-276651.jpeg",
-        "https://images.pexels.com/photos/3653849/pexels-photo-3653849.jpeg",
-        "https://images.pexels.com/photos/238377/pexels-photo-238377.jpeg",
-        "https://images.pexels.com/photos/3316923/pexels-photo-3316923.jpeg",
-        "https://images.pexels.com/photos/2771921/pexels-photo-2771921.jpeg",
-        "https://images.pexels.com/photos/4846437/pexels-photo-4846437.jpeg",
-        "https://images.pexels.com/photos/11929031/pexels-photo-11929031.jpeg",
-        "https://images.pexels.com/photos/2647714/pexels-photo-2647714.jpeg"
+        "https://aa-project-3.s3.amazonaws.com/04f8fe59ec784b349398ac2002ac8645.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/0d0dd43e392d4bf1bba4be5e3f002c1a.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/23f9521fbcf4419eacc9cdea9f9b509c.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/3ff8ac011b7c446b88733f5512307e6f.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/8038fb5c5cb146bd9e5429bbe0bf176d.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/987b5cb4c41646ac9d854c248578e64e.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/9f547f9573bd432aac79f5e7cd6ed070.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/bd2266278a1449408ae2144c35299469.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/c608ef52e4f140d7a8727cbc0bc84884.jpeg",
+        "https://aa-project-3.s3.amazonaws.com/f59acc81432740a2bec34412688d1fff.jpeg"
     ]
 
     product_images = []

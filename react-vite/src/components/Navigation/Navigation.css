@@ -1,6 +1,9 @@
 .navigation {
   background-color: transparent;
-  padding: 10px 0
+  padding-bottom: 10px;
+  * {
+    color: brown;
+  }
 }
 
 .navigation > .container {
@@ -9,9 +12,14 @@
   align-items: center;
 }
 
+.navigation .logo > :is(h1) {
+  color: brown;
+  text-shadow: 2px 2px 3px lightcoral;
+}
+
 .nav-icons {
   height: 100%;
-  font-size: 1.1em;
+  font-size: 1.3em;
   cursor: pointer;
 }
 
@@ -36,10 +44,15 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: white;
-  border: 2px solid black;
+  background-color: brown;
+  border: 2px solid lightcoral;
+  min-width: 100px;
   border-radius: 5px;
-  padding: 5px;
+  font-size: 1.1em;
+  padding: 10px 20px;
+  * {
+    color: white
+  }
   :is(li) {
     list-style: none;
     user-select: none;

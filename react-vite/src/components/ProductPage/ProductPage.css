@@ -3,11 +3,14 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px 0;
+  * {
+    color: brown;
+  }
 }
 
 .h-linebreak {
   width: 100%;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightcoral;
   padding-bottom: 5px;
   margin-bottom: 5px;
 }
@@ -52,6 +55,7 @@
 .carousel-image {
   width: 50px;
   height: 50px;
+  cursor: pointer;
   > img {
     border-radius: 5px;
     width: 100%;
@@ -59,14 +63,61 @@
   };
 }
 
-.selection > button {
-  width: 100%;
+.short-details {
+  :is(h1) {
+    color: brown
+  }
+}
+
+.quantity {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  :is(input){
+    width: 30px;
+    padding: 5px
+  }
+}
+
+.color {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  :is(select){
+    width: 200px;
+    padding: 5px
+  }
+}
+
+.right > .selection {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 60%;
+}
+
+.right > .selection > button {
+  color: white;
+  box-shadow: 2px 2px 4px black;
+  background-color: brown;
+  border: 2px solid lightcoral;
+  border-radius: 15px;
+  padding: 5px;
 }
 
 .product-reviews > .header {
   display: flex;
   justify-content: space-between;
   align-items: end;
+}
+
+.product-reviews .review-button {
+  box-shadow: 2px 2px 4px black;
+  background-color: brown;
+  border: 1px solid lightcoral;
+  padding: 2px 5px;
+  color: white
 }
 
 .product-reviews > form {
@@ -84,9 +135,42 @@
   }
 }
 
-.review-buttons {
+.review-container {
+  background-color: white;
+  border: 2px solid lightcoral;
   display: flex;
+  flex-direction: column;
   gap: 10px;
+  padding: 10px;
+  height: 250px;
+  overflow-y: auto;
+  scrollbar-color: lightcoral;
+  scrollbar-width: thin;
+  scroll-behavior: auto;
+}
+
+.review-container > .review {
+  background-color: lightcoral;
+  border: 1px solid brown;
+  border-radius: 15px;
+  padding: 5px 20px;
+  > .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  * {
+    color: white
+  }
+}
+
+.reviewer-buttons {
+  display: flex;
+  gap: 5px;
+}
+.user.reviewer-buttons > .review-button {
+  font-size: 10px;
 }
 
 .review-rating {
@@ -95,10 +179,22 @@
   cursor: pointer;
 }
 
-.review-buttons > .button {
-  background-color: gray;
-  padding: 2px 5px;
-  border: 2px solid black;
+.review-button {
   cursor: pointer;
   user-select: none;
+}
+
+
+.review-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.review-form > :is(textarea) {
+  border: 2px solid lightcoral;
+}
+
+.review-form .errors {
+  font-size: 0.8em;
 }

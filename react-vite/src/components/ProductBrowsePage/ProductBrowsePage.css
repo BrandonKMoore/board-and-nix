@@ -3,7 +3,7 @@
 }
 
 .productBrowserPage .hero {
-  background-image: url("https://www.nickandalicia.com/wp-content/uploads/2020/06/Outdoor-Furniture-3826.jpg");
+  background-image: url("https://aa-project-3.s3.amazonaws.com/0013e806592c462abf73e3d1aa2d4c25.jpeg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   /* background-position: center -200px;  Great for 1080 and smaller */
@@ -26,6 +26,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  :is(h1){
+    font-size: 3em;
+    color: brown;
+    text-shadow: 2px 2px 3px lightcoral;
+  }
 }
 
 .product-card-list {
@@ -40,6 +45,8 @@
   background-color: brown;
   border-radius: 10px;
   width: 22%;
+  color: white;
+  border: 3px solid lightcoral;
 }
 
 .product-card img {
@@ -53,5 +60,8 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 10px
+  padding: 10px;
+  * {
+    color: white;
+  }
 }

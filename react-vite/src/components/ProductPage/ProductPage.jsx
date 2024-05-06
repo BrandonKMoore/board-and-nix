@@ -5,6 +5,7 @@ import { MdOutlineStarOutline, MdOutlineStar } from "react-icons/md";
 import { thunkGetProductById } from '../../redux/product'
 import { thunkAddNewReview, thunkEditReview, thunkRemoveReviewById } from '../../redux/review'
 import './ProductPage.css'
+import Footer from '../Footer';
 
 export default function ProductPage(){
   const dispatch = useDispatch()
@@ -114,14 +115,18 @@ export default function ProductPage(){
             </div>
             <div className='h-linebreak'></div>
             <div className='selection'>
-              <div className='size'>
-                <span>Size:</span>
-              </div>
               <div className='color'>
-                <span>Color:</span>
+                <label>Color:</label>
+                <select name="bay-blue" id="">
+                  <option value="bay-blue">Bay Blue</option>
+                  <option value="ebony">Ebony</option>
+                  <option value="golden-oak">Golden oak</option>
+                  <option value="Kona">Kona</option>
+                </select>
               </div>
               <div className='quantity'>
-                <span>Quantity:</span>
+                <label>Quantity:</label>
+                <input type="number" min="1" max="10" />
               </div>
               <button onClick={()=> alert('Feature Coming Soon')}>Add to cart</button>
             </div>
@@ -136,12 +141,12 @@ export default function ProductPage(){
           <div className='header'>
             <h2>Reviews</h2>
             <div>
-              {showReviewForm || !user ? null : <button onClick={()=> setShowReviewForm(!showReviewForm)}>Leave Review</button>}
+              {showReviewForm || !user ? null : <button className="review-button" onClick={()=> setShowReviewForm(!showReviewForm)}>Leave Review</button>}
             </div>
           </div>
           <div className="h-linebreak"></div>
           {showReviewForm ?
-              <form onSubmit={handleReviewSubmit} action="">
+              <form className='review-form' onSubmit={handleReviewSubmit} action="">
                 <div className='review-rating'>
                   <h5>Rating:</h5>
                   <div>
@@ -151,31 +156,42 @@ export default function ProductPage(){
                     {reviewStars > 3 ? <span onClick={()=> setReviewStars(4)}><MdOutlineStar /></span>: <span onClick={()=> setReviewStars(4)}><MdOutlineStarOutline /></span>}
                     {reviewStars > 4 ? <span onClick={()=> setReviewStars(5)}><MdOutlineStar /></span>: <span onClick={()=> setReviewStars(5)}><MdOutlineStarOutline /></span>}
                   </div>
+                {errors.reviewStars && <p className='errors'>{errors.reviewStars}</p>}
                 </div>
-                  {errors.reviewStars && <p>{errors.reviewStars}</p>}
                 <textarea className='input' value={reviewBody} onChange={(e) => setReviewBody(e.target.value)} name="" placeholder='Enter a review' id=""></textarea>
-                  {errors.reviewBody && <p>{errors.reviewBody}</p>}
-                <div className='review-buttons'>
-                  <button className='button' type='submit'>Submit Review</button>
-                  <span className='button' onClick={(e)=> handleReviewCancel(e)}>Cancel</span>
+                {errors.reviewBody && <p className='errors'>{errors.reviewBody}</p>}
+                <div className='reviewer-buttons'>
+                  <button className='review-button' type='submit'>Submit Review</button>
+                  <button className='review-button' type='reset' onClick={(e)=> handleReviewCancel(e)}>Cancel</button>
                 </div>
               </form>
           : null}
           <div className='review-container'>
             {productReviews.map((review)=>
               <div className='review' key={review.id}>
-                <div>Review By {review.user_id}</div>
-                <div>Stars {review.stars}</div>
-                <div>Comment {review.body}</div>
-                {review.user_id == user.id ? <div className='reviewer-buttons'>
-                  <button onClick={(e) => handleReviewEdit(e, review)}>Edit</button>
-                  <button onClick={(e) => handleReviewDelete(e, review)}>Delete</button>
-                  </div>: null}
+                <div className='heading'>
+                  <div className='review-left'>
+                    <span className='review-text'>Review By {review.user}</span>
+                    {user?.id == review.user_id ? <div className='user reviewer-buttons'>
+                      <button className="review-button" onClick={(e) => handleReviewEdit(e, review)}>Edit</button>
+                      <button className="review-button" onClick={(e) => handleReviewDelete(e, review)}>Delete</button>
+                    </div>: null}
+                  </div>
+                  <div className='starRating'>
+                    {review.stars > 0 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
+                    {review.stars > 1 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
+                    {review.stars > 2 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
+                    {review.stars > 3 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
+                    {review.stars > 4 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
+                  </div>
+                </div>
+                <span>"{review.body}"</span>
               </div>
             )}
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
