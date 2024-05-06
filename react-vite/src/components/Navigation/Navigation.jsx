@@ -61,7 +61,7 @@ function Navigation() {
             : <RxHamburgerMenu onClick={handleMenuClick}/>}
         </div>
         <div className="logo">
-          <h1>BOARD & NIX</h1>
+          <h1><Link to='/'>BOARD & NIX</Link></h1>
         </div>
         <div className="right nav-icons">
           {user ? <Link to='/admin'><IoPersonOutline /></Link>: <i onClick={() => alert('Please sign in using the menu')}><IoPersonOutline /></i>}

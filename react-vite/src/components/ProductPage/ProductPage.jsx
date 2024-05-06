@@ -185,7 +185,7 @@ export default function ProductPage(){
                     {review.stars > 4 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
                   </div>
                 </div>
-                <span>"{review.body}"</span>
+                <span>&quot;{review.body}&quot;</span>
               </div>
             )}
           </div>

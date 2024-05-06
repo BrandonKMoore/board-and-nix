@@ -2,12 +2,10 @@ import ProductFormModal from '../ProductFormModal'
 import { useSelector } from 'react-redux'
 import './AdminPage.css'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import ManageProduct from '../ManageProduct'
 import Footer from '../Footer'
 
 export default function AdminPage(){
-  const navigate = useNavigate()
   const user = useSelector(state => state.session.user)
   const [render, setRender] = useState('')
   if (!user) return <span>Loading...</span>

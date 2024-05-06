@@ -20,24 +20,23 @@ function LoginFormModal() {
     if(!email) newErrors.email = 'The email you have entered is invalid'
     if(!password || password.length < 8) newErrors.password = 'Password require at least 8 characters'
 
-    if (Object.keys(newErrors)) return setErrors(newErrors)
 
-    if (e.type == 'click'){
+    if (Object.keys(newErrors).length > 1) return setErrors(newErrors)
 
-    } else {
       const serverResponse = await dispatch(
-        thunkLogin({
-          email,
-          password,
-        })
-      );
+      thunkLogin({
+        email,
+        password,
+      })
+    )
 
-      if (serverResponse) {
-        setErrors(serverResponse);
-      } else {
-        closeModal();
-      }
+    console.log(serverResponse)
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
     }
+
   }
 
   const handleDemoButton = async (e) => {
@@ -56,6 +55,7 @@ function LoginFormModal() {
   return (
     <div className="loginModal">
       <h1>Log In</h1>
+          {console.log(errors)}
           {errors.email && <p className="loginErrors">{errors.email}</p>}
           {errors.password && <p className="loginErrors">{errors.password}</p>}
       <form className='.loginModalForm' onSubmit={handleSubmit}>
