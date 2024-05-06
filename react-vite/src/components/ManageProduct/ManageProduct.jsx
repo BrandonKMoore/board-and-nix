@@ -17,14 +17,16 @@ export default function ManageProduct(){
     <div className="manage-product-list">
       {userProducts.map((product)=>
       <div className="product-card" key={product.id}>
-        <Link to={`/products/${product.id}`}>
-          <img src={product.Images.length > 0 ? product.Images.find((image)=> image.is_cover === true).image_url: null} alt="" />
-        </Link>
-        <div className="details">
-          <Link to={`/products/${product.id}`}><h4>{product.name}</h4></Link>
-          <span>From ${product.price}</span>
+        <div className="manage-products">
+          <Link to={`/products/${product.id}`}>
+            <img src={product.Images.length > 0 ? product.Images.find((image)=> image.is_cover === true).image_url: null} alt="" />
+          </Link>
+          <div className="details">
+            <Link to={`/products/${product.id}`}><h4>{product.name}</h4></Link>
+            <span>From ${product.price}</span>
+          </div>
         </div>
-        <div>
+        <div className="manage-buttons">
           <OpenModalButton
             modalComponent={<ProductFormModal props={product}/>}
             buttonText='Edit'

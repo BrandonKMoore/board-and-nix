@@ -8,12 +8,28 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px;
+  background-color: brown;
+  border: 3px solid lightcoral;
+  padding: 20px;
   width: fit-content;
   :is(label) > input {
     width: 100%
   }
+  * {
+    color: white
+  }
+  > .submit-button {
+    background-color: lightcoral;
+    border: 2px solid white;
+    box-shadow: 1px 1px 5px lightcoral;
+    padding: 5px 0;
+    font-size: 1em;
+    text-align: center;
+    color: white
+  }
 }
+
+
 
 .customizable {
   display: flex;
