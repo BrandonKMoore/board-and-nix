@@ -163,7 +163,7 @@ export default function ProductFormModal({props}){
             <input type="file" name='image_files' accept='image/*' alt="" multiple/>
           </label>
         </div>
-        <button type="submit">Submit</button>
+        <button className="submit-button" type="submit">Submit</button>
       </form>
     </div>
   )

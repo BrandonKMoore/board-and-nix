@@ -166,6 +166,7 @@ export default function ProductPage(){
                 </div>
               </form>
           : null}
+          {productReviews.length > 0?
           <div className='review-container'>
             {productReviews.map((review)=>
               <div className='review' key={review.id}>
@@ -189,6 +190,7 @@ export default function ProductPage(){
               </div>
             )}
           </div>
+          : <span className='no-review'>No reviews has been made for this product yet</span>}
         </div>
       </div>
       <Footer />

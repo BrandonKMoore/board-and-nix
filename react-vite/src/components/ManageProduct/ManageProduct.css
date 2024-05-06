@@ -4,3 +4,28 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+
+.manage-product-list > .product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .details {
+    padding: 5px;
+  }
+}
+
+.manage-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 5px;
+  > :is(button){
+  background-color: lightcoral;
+  border: 2px solid white;
+  box-shadow: 1px 1px 5px lightcoral;
+  padding: 0 5px;
+  font-size: 1em;
+  text-align: center;
+  color: white
+  }
+}
