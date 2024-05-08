@@ -5,7 +5,7 @@ import "./Navigation.css";
 import { IoPersonOutline } from "react-icons/io5";
 import { PiShoppingCartSimple  } from "react-icons/pi";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import { thunkLogout } from "../../redux/session";
@@ -15,6 +15,7 @@ function Navigation() {
   const user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const ref = useRef()
 
   const handleMenuClick = () => {
     setShowMenu(!showMenu)
@@ -27,14 +28,32 @@ function Navigation() {
     navigate('/')
   };
 
+  useEffect(() => {
+    // Function to handle click outside
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        // Click occurred outside of the target element
+        setShowMenu(false); // Toggle the state
+      }
+    };
+
+    // Add event listener to handle click outside
+    document.addEventListener('click', handleClickOutside);
+
+    // Cleanup function to remove event listener
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []); // Only run effect once on mount
+
   return (
     <div className="navigation">
       <div className="container">
         <div className="left nav-icons">
           {showMenu ? (
-            <>
-              <RxCross1 onClick={handleMenuClick}/>
-              <ul className="dropdown-menu">
+            <div ref={ref} onMouseLeave={handleMenuClick}>
+              <RxCross1 />
+              <ul className="dropdown-menu" >
                 <li><NavLink to='/' onClick={handleMenuClick}>Home</NavLink></li>
                 <li><NavLink to='/products' onClick={handleMenuClick}>Browse</NavLink></li>
                 {user ?
@@ -56,9 +75,9 @@ function Navigation() {
                     />
                 </>}
               </ul>
-            </>
+            </div>
           )
-            : <RxHamburgerMenu onClick={handleMenuClick}/>}
+            : <RxHamburgerMenu onMouseEnter={handleMenuClick} />}
         </div>
         <div className="logo">
           <h1><Link to='/'>BOARD & NIX</Link></h1>

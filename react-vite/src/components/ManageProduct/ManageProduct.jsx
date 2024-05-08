@@ -40,7 +40,7 @@ export default function ManageProduct(){
           </div>
         </div>)}
       </>
-      : <div className="info"> <span>No product was created by you yet.</span><span>What&apos;s a better time than now!</span><span>Click on create product to get started.</span></div>}
+      : <div className="info"><span>No product was created by you yet.</span><span>What&apos;s a better time than now!</span><span>Click on create product to get started.</span></div>}
     </div>
   )
 }
