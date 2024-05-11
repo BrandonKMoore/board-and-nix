@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 
 
 class User(db.Model, UserMixin):
@@ -13,8 +14,16 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    phone = db.Column(db.String)
+    address = db.Column(db.String)
+    email_sub = db.Column(db.Boolean, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
 
-    reviews = db.relationship('Review', back_populates='user', cascade="all, delete-orphan")
+    orders = db.relationship('Order', back_populates='user')
+    reviews = db.relationship('Review', back_populates='user')
     products = db.relationship('Product', back_populates='user', cascade="all, delete-orphan")
 
     @property
@@ -32,5 +41,9 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'address': self.address,
+            'email_sub': self.email_sub
         }

@@ -1,19 +1,42 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from faker import Faker
+from random import choice
 
+fake = Faker('en_Us')
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+    seed_user_list = []
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    demo_user = User(
+        username='Demo',
+        email='demo@aa.io',
+        password='password',
+        first_name='demo',
+        last_name='user',
+        phone='(615)559-9292',
+        address='5482 Demonstration Ln. Nashville, TN',
+        email_sub=True
+        )
+
+    seed_user_list.append(demo_user)
+
+    for _ in range(10):
+        new_user = demo = User(
+            username=fake.user_name(),
+            email=fake.email(),
+            password='password',
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            phone=fake.basic_phone_number(),
+            address=fake.address(),
+            email_sub=choice([True, False])
+        )
+
+        seed_user_list.append(new_user)
+
+    db.session.add_all(seed_user_list)
     db.session.commit()
 
 
@@ -28,5 +51,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()

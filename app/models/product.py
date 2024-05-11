@@ -22,6 +22,7 @@ class Product(db.Model):
   product_images = db.relationship('ProductImage', back_populates='product', cascade="all, delete-orphan")
   reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan")
   user = db.relationship('User', back_populates='products')
+  order_products = db.relationship('Product', back_populates='product')
 
   def get_dimensions(self):
     if self.dimension_l and self.dimension_l and self.dimension_w:
