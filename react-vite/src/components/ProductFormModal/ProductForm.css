@@ -15,7 +15,7 @@
   :is(label) > input {
     width: 100%
   }
-  * {
+  h1, label, span, .file-select  {
     color: white
   }
   > .submit-button {

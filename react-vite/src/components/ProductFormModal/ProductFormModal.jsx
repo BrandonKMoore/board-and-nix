@@ -102,7 +102,7 @@ export default function ProductFormModal({props}){
               onChange={(e) => setDimension_l(e.target.value)}
               />
           </label>
-          <div>in x</div>
+          <span>in x</span>
           <label className="size">
             <input
               type="number"
@@ -112,7 +112,7 @@ export default function ProductFormModal({props}){
               onChange={(e) => setDimension_w(e.target.value)}
               />
           </label>
-          <div>in x</div>
+          <span>in x</span>
           <label className="size">
             <input
               type="number"
@@ -160,7 +160,7 @@ export default function ProductFormModal({props}){
         <div className="uploadImg">
           <label>
             <span>Upload product picture(s): </span>
-            <input type="file" name='image_files' accept='image/*' alt="" multiple/>
+            <input className="file-select" type="file" name='image_files' accept='image/*' alt="" multiple/>
           </label>
         </div>
         <button className="submit-button" type="submit">Submit</button>
