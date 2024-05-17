@@ -13,7 +13,7 @@ export default function LandingPage(){
                 <span>with the natural</span>
                 <span>beauty of wood</span>
               </h1>
-              <button onClick={()=> navigate('/products')}>BROWSE COLLECTION</button>
+              <button className='hover-element' onClick={()=> navigate('/products')}>BROWSE COLLECTION</button>
           </div>
         </div>
       </div>

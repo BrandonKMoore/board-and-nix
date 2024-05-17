@@ -20,7 +20,9 @@
 .nav-icons {
   height: 100%;
   font-size: 1.3em;
-  cursor: pointer;
+  :is(svg) {
+    cursor: pointer;
+  }
 }
 
 .left.nav-icons {

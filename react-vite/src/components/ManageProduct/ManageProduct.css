@@ -11,6 +11,9 @@
   justify-content: space-between;
   .details {
     padding: 5px;
+    :is(h4), :is(span) {
+      color: white
+    }
   }
 }
 
