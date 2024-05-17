@@ -3,7 +3,6 @@ from sqlalchemy.sql import text
 from random import choice, randint
 
 
-# Adds a demo user, you can add other users here if you want
 def seed_products():
 
     descriptions = [

@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
-
 class Order(db.Model):
   __tablename__ = 'orders'
 
@@ -15,7 +14,7 @@ class Order(db.Model):
   updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
 
   user = db.relationship('User', back_populates='orders')
-  order_products = db.relationship('ProductOrder', back_populates='order', cascade="all, delete-orphan")
+  order_products = db.relationship('OrderProduct', back_populates='order', cascade="all, delete-orphan")
 
   def to_dict(self):
     return {
