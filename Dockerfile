@@ -20,8 +20,6 @@ RUN pip install boto3
 
 COPY . .
 
-RUN flask seed undo
-RUN flask db downgrade
 RUN flask db upgrade
 RUN flask seed all
 
