@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-
+import './DeleteConfirmation.css'
 
 export default function DeleteConfirmation({props}){
   const { closeModal } = useModal();
@@ -14,10 +14,11 @@ export default function DeleteConfirmation({props}){
   }
 
   return (
-    <div>
+    <div id="delete-confirmation-container">
+      <h2>Delete Product</h2>
       <span >Are you sure you want to delete?</span>
-      <div>
-        <button onClick={()=> handleDelete()}>Delete</button>
+      <div className="selection">
+        <button className='delete' onClick={()=> handleDelete()}>Delete</button>
         <button onClick={()=> closeModal()}>Cancel</button>
       </div>
     </div>

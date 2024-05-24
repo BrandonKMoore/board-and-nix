@@ -141,7 +141,7 @@ export default function ProductPage(){
           <div className='header'>
             <h2>Reviews</h2>
             <div>
-              {showReviewForm || !user ? null : <button className="review-button" onClick={()=> setShowReviewForm(!showReviewForm)}>Leave Review</button>}
+              {showReviewForm || !user || product.user_id === user.id ? null : <button className="review-button" onClick={()=> setShowReviewForm(!showReviewForm)}>Leave Review</button>}
             </div>
           </div>
           <div className="h-linebreak"></div>
