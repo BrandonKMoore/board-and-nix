@@ -3,7 +3,7 @@ import LoginFormModal from '../LoginFormModal'
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 import { IoPersonOutline } from "react-icons/io5";
-import { PiShoppingCartSimple  } from "react-icons/pi";
+// import { PiShoppingCartSimple  } from "react-icons/pi";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
