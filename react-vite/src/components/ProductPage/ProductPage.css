@@ -60,7 +60,14 @@
     border-radius: 5px;
     width: 100%;
     height: 100%;
+    padding: 2px;
   };
+  > #active {
+    border: 2px solid lightcoral;
+  }
+  > #inactive {
+    border: 2px solid transparent;
+  }
 }
 
 .short-details {
