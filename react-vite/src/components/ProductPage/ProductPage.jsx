@@ -90,7 +90,7 @@ export default function ProductPage(){
   }
 
 
-  if (!mainImage) setMainImage(product.Images.find(product => product.is_cover === true).image_url)
+  if (!mainImage) setMainImage(product.Images.find(product => product.is_cover === true))
 
   let productReviews
 
