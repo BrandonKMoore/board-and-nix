@@ -114,7 +114,7 @@ export default function ProductPage(){
               <span>${product.price}</span>
             </div>
             <div className='h-linebreak'></div>
-            <div className='selection'>
+            {/* <div className='selection'>
               <div className='color'>
                 <label>Color:</label>
                 <select name="bay-blue" id="">
@@ -129,7 +129,7 @@ export default function ProductPage(){
                 <input type="number" min="1" max="10" />
               </div>
               <button className="add-to-cart" onClick={()=> alert('Feature Coming Soon')}>Add to cart</button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className='product-details'>
