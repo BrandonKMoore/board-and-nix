@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { MdOutlineStarOutline, MdOutlineStar } from "react-icons/md";
 import { thunkGetProductById } from '../../redux/product'
+import DeleteConfirmation from "../DeleteConfirmation"
+import OpenModalButton from "../OpenModalButton/OpenModalButton"
 import { thunkAddNewReview, thunkEditReview, thunkRemoveReviewById } from '../../redux/review'
 import './ProductPage.css'
 import Footer from '../Footer';
@@ -176,6 +178,10 @@ export default function ProductPage(){
                     {user?.id == review.user_id ? <div className='user reviewer-buttons'>
                       <button className="review-button" onClick={(e) => handleReviewEdit(e, review)}>Edit</button>
                       <button className="review-button" onClick={(e) => handleReviewDelete(e, review)}>Delete</button>
+                      <OpenModalButton
+                        modalComponent={<DeleteConfirmation props={[review, thunkRemoveReviewById]}/>}
+                        buttonText='Delete'
+                      />
                     </div>: null}
                   </div>
                   <div className='starRating'>
@@ -186,7 +192,7 @@ export default function ProductPage(){
                     {review.stars > 4 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
                   </div>
                 </div>
-                <span>&quot;{review.body}&quot;</span>
+                <span className='review-text'>{review.body}</span>
               </div>
             )}
           </div>

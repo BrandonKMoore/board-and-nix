@@ -169,9 +169,21 @@
 .reviewer-buttons {
   display: flex;
   gap: 5px;
+  :is(button){
+    cursor: pointer;
+    user-select: none;
+    font-size: 10px;
+    box-shadow: 2px 2px 4px black;
+    background-color: brown;
+    border: 1px solid lightcoral;
+    padding: 2px 5px;
+    color: white
+  }
 }
-.user.reviewer-buttons > .review-button {
-  font-size: 10px;
+
+.review-text {
+  word-wrap: break-word;
+  text-wrap: wrap;
 }
 
 .review-rating {
@@ -179,12 +191,6 @@
   gap: 5px;
   cursor: pointer;
 }
-
-.review-button {
-  cursor: pointer;
-  user-select: none;
-}
-
 
 .review-left {
   display: flex;
