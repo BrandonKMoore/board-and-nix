@@ -12,6 +12,7 @@
   background-size: cover;
   min-height: 200px;
   height: 100vh;
+  min-height: 650px;
 }
 
 .landingPage > .hero > .overlay {

@@ -9,3 +9,19 @@
     color: white
   }
 }
+
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  > .contacts {
+    display: flex;
+    gap: 50px;
+    > :is(a){
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+  }
+}

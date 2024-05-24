@@ -3,7 +3,7 @@ import LoginFormModal from '../LoginFormModal'
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 import { IoPersonOutline } from "react-icons/io5";
-import { PiShoppingCartSimple  } from "react-icons/pi";
+// import { PiShoppingCartSimple  } from "react-icons/pi";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -83,8 +83,14 @@ function Navigation() {
           <h1><Link to='/'>BOARD & NIX</Link></h1>
         </div>
         <div className="right nav-icons">
-          {user ? <Link to='/admin'><IoPersonOutline /></Link>: <i onClick={() => alert('Please sign in using the menu')}><IoPersonOutline /></i>}
-          {user ? <i onClick={() => alert('Feature coming soon')}><PiShoppingCartSimple /></i>: <i onClick={() => alert('Please sign in using the menu')}><PiShoppingCartSimple /></i>}
+          {user ? <Link to='/admin'><IoPersonOutline /></Link>:
+              <i id="account-icon"><OpenModalMenuItem
+              itemText={<IoPersonOutline />}
+              modalComponent={<LoginFormModal />}
+              /></i>
+          // <i onClick={() => alert('Please sign in using the menu')}><IoPersonOutline /></i>
+          }
+          {/* {user ? <i onClick={() => alert('Feature coming soon')}><PiShoppingCartSimple /></i>: <i onClick={() => alert('Please sign in using the menu')}><PiShoppingCartSimple /></i>} */}
         </div>
       </div>
     </div>

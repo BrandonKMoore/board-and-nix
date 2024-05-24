@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { MdOutlineStarOutline, MdOutlineStar } from "react-icons/md";
 import { thunkGetProductById } from '../../redux/product'
+import DeleteConfirmation from "../DeleteConfirmation"
+import OpenModalButton from "../OpenModalButton/OpenModalButton"
 import { thunkAddNewReview, thunkEditReview, thunkRemoveReviewById } from '../../redux/review'
 import './ProductPage.css'
 import Footer from '../Footer';
@@ -100,11 +102,12 @@ export default function ProductPage(){
         <div className='product-main'>
           <div className='left'>
             <div className='image-container'>
-              <img src={mainImage} alt="" />
+              <img src={mainImage.image_url} alt="" />
             </div>
             <div className='product-image-carousel'>
               {product.Images.map((image) => <div className='carousel-image' key={image.id}>
-                <img onClick={()=> setMainImage(image.image_url)} src={image.image_url} alt="" />
+              {console.log(mainImage === image.image_url)}
+                <img id={mainImage.id === image.id ? 'active' : 'inactive'} onClick={()=> setMainImage(image)} src={image.image_url} alt="" />
               </div>)}
             </div>
           </div>
@@ -114,7 +117,7 @@ export default function ProductPage(){
               <span>${product.price}</span>
             </div>
             <div className='h-linebreak'></div>
-            <div className='selection'>
+            {/* <div className='selection'>
               <div className='color'>
                 <label>Color:</label>
                 <select name="bay-blue" id="">
@@ -129,7 +132,7 @@ export default function ProductPage(){
                 <input type="number" min="1" max="10" />
               </div>
               <button className="add-to-cart" onClick={()=> alert('Feature Coming Soon')}>Add to cart</button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className='product-details'>
@@ -141,7 +144,7 @@ export default function ProductPage(){
           <div className='header'>
             <h2>Reviews</h2>
             <div>
-              {showReviewForm || !user ? null : <button className="review-button" onClick={()=> setShowReviewForm(!showReviewForm)}>Leave Review</button>}
+              {showReviewForm || !user || product.user_id === user.id ? null : <button className="review-button" onClick={()=> setShowReviewForm(!showReviewForm)}>Leave Review</button>}
             </div>
           </div>
           <div className="h-linebreak"></div>
@@ -176,6 +179,10 @@ export default function ProductPage(){
                     {user?.id == review.user_id ? <div className='user reviewer-buttons'>
                       <button className="review-button" onClick={(e) => handleReviewEdit(e, review)}>Edit</button>
                       <button className="review-button" onClick={(e) => handleReviewDelete(e, review)}>Delete</button>
+                      <OpenModalButton
+                        modalComponent={<DeleteConfirmation props={[review, thunkRemoveReviewById]}/>}
+                        buttonText='Delete'
+                      />
                     </div>: null}
                   </div>
                   <div className='starRating'>
@@ -186,7 +193,7 @@ export default function ProductPage(){
                     {review.stars > 4 ? <span><MdOutlineStar /></span>: <span><MdOutlineStarOutline /></span>}
                   </div>
                 </div>
-                <span>&quot;{review.body}&quot;</span>
+                <span className='review-text'>{review.body}</span>
               </div>
             )}
           </div>

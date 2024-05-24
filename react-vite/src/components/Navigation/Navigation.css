@@ -42,6 +42,10 @@
   font-size: 1.2em;
 }
 
+#account-icon {
+  list-style: none;
+}
+
 .dropdown-menu {
   position: absolute;
   display: flex;

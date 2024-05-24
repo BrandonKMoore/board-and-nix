@@ -40,6 +40,10 @@
   color: white
 }
 
+.signupBtn:hover {
+  cursor: pointer;
+}
+
 .signupErrors {
   font-size: .8em;
   color: lightcoral;

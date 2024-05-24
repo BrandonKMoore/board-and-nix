@@ -40,6 +40,10 @@
   color: white
 }
 
+.loginBtn:hover {
+  cursor: pointer;
+}
+
 .loginErrors {
   font-size: .8em;
   color: lightcoral;
