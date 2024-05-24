@@ -7,7 +7,7 @@ import Footer from '../Footer'
 
 export default function AdminPage(){
   const user = useSelector(state => state.session.user)
-  const [render, setRender] = useState('')
+  const [render, setRender] = useState(<ProductFormModal />)
   if (!user) return <span>Loading...</span>
 
   return (
