@@ -22,12 +22,13 @@ export default function ProductFormModal({props}){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const newError = {}
 
     if (name.length < 3) newError.name = 'Name has to be longer than 3 characters'
     if (!price) newError.price = 'Please enter the price (format: $xxx.xx)'
     if (description.length < 100) newError.description = 'Description has to be longer than 100 characters'
+    if (!props && !e.currentTarget.image_files.value) newError.image_files = 'Please upload at least 1 image'
     if (!dimension_l || !dimension_w || !dimension_h) {
       let dimensionError = 'Please enter a'
       if (!dimension_l) dimensionError += ' length'
@@ -149,7 +150,7 @@ export default function ProductFormModal({props}){
         </div>
         {errors.customizable && <p className="errors">{errors.customizable}</p>}
         <label>
-          <textarea cols={50} rows={10}
+          <textarea
             type="text"
             placeholder=" Enter Product Description"
             value={description}
@@ -162,6 +163,7 @@ export default function ProductFormModal({props}){
             <span>Upload product picture(s): </span>
             <input className="file-select" type="file" name='image_files' accept='image/*' alt="" multiple/>
           </label>
+          {errors.image_files && <p className="errors">{errors.image_files}</p>}
         </div>
         <button className="submit-button" type="submit">Submit</button>
       </form>

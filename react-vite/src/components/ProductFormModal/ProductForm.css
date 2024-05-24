@@ -13,10 +13,15 @@
   padding: 20px;
   width: fit-content;
   :is(label) > input {
+    padding: 2px;
     width: 100%
   }
+  :is(textarea) {
+    width: 100%;
+    height: 150px
+  }
   :is(h1), :is(label), :is(span), .file-select  {
-    color: white
+    color: white;
   }
   > .submit-button {
     background-color: lightcoral;
@@ -28,8 +33,6 @@
     color: white
   }
 }
-
-
 
 .customizable {
   display: flex;
