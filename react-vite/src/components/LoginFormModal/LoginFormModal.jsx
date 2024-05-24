@@ -30,7 +30,6 @@ function LoginFormModal() {
       })
     )
 
-    console.log(serverResponse)
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
@@ -55,7 +54,6 @@ function LoginFormModal() {
   return (
     <div className="loginModal">
       <h1>Log In</h1>
-          {console.log(errors)}
           {errors.email && <p className="loginErrors">{errors.email}</p>}
           {errors.password && <p className="loginErrors">{errors.password}</p>}
       <form className='.loginModalForm' onSubmit={handleSubmit}>
