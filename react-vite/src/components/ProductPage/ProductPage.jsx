@@ -106,7 +106,6 @@ export default function ProductPage(){
             </div>
             <div className='product-image-carousel'>
               {product.Images.map((image) => <div className='carousel-image' key={image.id}>
-              {console.log(mainImage === image.image_url)}
                 <img id={mainImage.id === image.id ? 'active' : 'inactive'} onClick={()=> setMainImage(image)} src={image.image_url} alt="" />
               </div>)}
             </div>
